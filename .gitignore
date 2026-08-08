@@ -1,0 +1,22 @@
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*~
+
+# === Editor & tool temp ===
+*.swp
+*.tmp
+.idea/
+.vscode/
+
+# === Large reference downloads (BCTC PDF, exports) ===
+# Mặc định loại trừ file lớn tải về (PDF báo cáo tài chính, export Excel).
+# Nếu muốn lưu một báo cáo cụ thể vào git, dùng: git add -f path/to/file.pdf
+*.pdf
+*.xlsx
+*.csv
+*.zip
+
+# === Local secrets / notes cá nhân ===
+.env
+*.local.md
