@@ -1,0 +1,21 @@
+id: REQ-MVP-03
+title: Co che ghi nhan tai lieu va chuyen doi sang dang LLM
+status: draft
+priority: 6
+plane: build
+component: ContextBuilder
+tags: [mvp, p2, docs, llm]
+created: 2026-08-09
+mo_ta: |
+  Xay dung luong ghi nhan tai lieu nghien cuu (bao cao nganh, nhan dinh) va
+  chuyen doi sang dang LLM doc hieu qua (chunks + metadata + llms.txt) de lam
+  tri thuc nen cho ReviewGate va giai thich khuyen nghi.
+acceptance:
+  - Co thu muc tiep nhan tai lieu (markdown/pdf) va script tach chunk co metadata.
+  - Sinh file llms.txt tom tat de agent/LLM truy xuat nhanh.
+  - Tai lieu cu (context/legacy) duoc danh nhan do tin cay, khong trat lon voi data that.
+can:
+  - co che spec hien tai
+  - context/facts/legacy-2024-2025.md
+khong_duoc:
+  - Tu dong rut ra khuyen nghi tu tai lieu khong co so so lieu

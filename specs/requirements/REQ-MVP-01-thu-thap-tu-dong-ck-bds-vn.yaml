@@ -1,0 +1,28 @@
+id: REQ-MVP-01
+title: Thu thap tu dong du lieu thi truong CK/BDS Viet Nam
+status: draft
+priority: 8
+plane: ops
+component: DataIngestConnector
+tags: [mvp, p1, ingest, source]
+created: 2026-08-09
+origin:
+  channel: human
+  requested_by: nha-dau-tu
+  requested_at: 2026-08-09
+mo_ta: |
+  Thay the connector World Bank hay loi 502 bang luong thu thap da nguon tu cac
+  nguon mo truy cap duoc tu VN: GSO PX-Web (vi mo), SSI FastConnect (chinh chu,
+  can token free), KBS (khong key, co ca NN rong), VNDirect/CafeF scrape, vnstock.
+  Moi ban ghi raw + provenance (source, url, fetched_at, checksum).
+acceptance:
+  - Co it nhat 1 connector chay that lay duoc du lieu vao RawStore (khong chi la schema).
+  - Neu nguon chet (502/000/403) he thong danh dau thieu, bao loi, KHONG sinh so thay.
+  - Du lieu vi mo it nhat 10 chi so VN tu GSO hoac WB (khong chi 7 nhu cu).
+  - Toan bo endpoint kiem chung bang curl thuc te (xem vnir/registry/nguon-*.md).
+can:
+  - connector framework hien tai (vnir/connectors/base.py)
+  - catalog vnir/registry/nguon-vi-mo.md va vnir/registry/nguon-ck-bds.md
+khong_duoc:
+  - Dung nguon tra phi (Bloomberg/Refinitiv/FiinPro)
+  - Vuot Cloudflare bat hop phap (dung proxy dan cu neu can, ghi ro)

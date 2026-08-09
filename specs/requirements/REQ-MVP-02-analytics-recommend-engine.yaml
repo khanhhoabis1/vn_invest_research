@@ -1,0 +1,23 @@
+id: REQ-MVP-02
+title: AnalyticsEngine & RecommendEngine (dinh gia, scoring, gia muc tieu)
+status: draft
+priority: 8
+plane: build
+component: AnalyticsEngine
+tags: [mvp, p2, engine, recommend]
+created: 2026-08-09
+mo_ta: |
+  Xay dung engine tinh dinh gia (PE/PB/ROE/DCF don gian/Gordon), cham diem da
+  yeu to (0-100, 6 nhom tin hieu), tong hop thanh khuyen nghi danh muc + gia
+  muc tieu. Moi so co evidence (source_id).
+acceptance:
+  - Tu data curated -> ra 1 khuyen nghi co bang chung cho 1 ma (VNM/VND).
+  - Scoring theo trong so Valuation25/Quality25/Momentum20/Growth20/Risk10.
+  - Gia muc tieu = trung binh PT1(PE 70%) + PT2(DCF 30%), in ro gia dinh.
+  - Upside >+50% hoac <-30% -> bat buoc vao pending_review.json cho nguoi duyet.
+can:
+  - MVP-ENGINE.md (khung tin hieu + guardrail)
+  - COMP-MVP-02 (curated data)
+khong_duoc:
+  - Dung LLM/ML nang sinh so tu do
+  - Tu thuc thi qua broker
