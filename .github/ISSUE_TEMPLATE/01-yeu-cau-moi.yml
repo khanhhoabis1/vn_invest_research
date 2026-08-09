@@ -1,0 +1,52 @@
+name: 💡 Yêu cầu mới
+description: Đề xuất dữ liệu mới, tính năng mới, hoặc cải thiện nền tảng
+title: "[YEU CAU] "
+labels: ["cần phân loại"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cứ viết bằng tiếng Việt tự nhiên. Bạn **không cần biết** REQ/COMP/TASK là gì —
+        Squad sẽ phân rã yêu cầu này thành spec máy đọc được.
+
+  - type: textarea
+    id: mong-muon
+    attributes:
+      label: Bạn muốn gì?
+      description: Mô tả bằng lời của bạn, càng cụ thể càng tốt.
+      placeholder: |
+        Ví dụ: Tôi muốn xem lãi suất liên ngân hàng qua đêm theo ngày,
+        để đánh giá thanh khoản hệ thống trước khi quyết định mua cổ phiếu ngân hàng.
+    validations:
+      required: true
+
+  - type: textarea
+    id: vi-sao
+    attributes:
+      label: Vì sao cần?
+      description: Nó giúp bạn ra quyết định gì? Không có nó thì bất tiện thế nào?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mat-phang
+    attributes:
+      label: Thuộc nhóm nào?
+      options:
+        - Ops — vận hành, thu thập, hiển thị dữ liệu
+        - Build — nâng cấp nền tảng, thêm tính năng
+        - Chưa rõ
+    validations:
+      required: true
+
+  - type: input
+    id: nguon
+    attributes:
+      label: Bạn biết nguồn dữ liệu nào không? (không bắt buộc)
+      placeholder: "https://sbv.gov.vn/... hoặc tên cơ quan công bố"
+
+  - type: dropdown
+    id: gap
+    attributes:
+      label: Mức độ cần gấp
+      options: ["Bình thường", "Cần trong tuần này", "Chặn việc đang làm"]

@@ -1,0 +1,31 @@
+id: REQ-0002
+title: 'Tach giao dien thanh 2 nhom: Build plane va Ops plane'
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: Giao dien co the tach lam 2 nhom chinh, nhom cung cap yeu cau cai thien nang cap platform
+    va nhom van hanh thu thap du lieu, hien thi thong tin du lieu da thu thap duoc.
+  requested_by: nha-dau-tu
+problem: Neu gop chung mot UI, nguoi van hanh du lieu se lan voi nguoi nang cap nen tang; rui ro sua nham
+  kien truc va giao dien roi ram khong dung cho ai ca.
+outcome: 'Hai ung dung UI tach biet, cong khac nhau: 8601 cho nhom cung cap yeu cau cai thien/nang cap
+  nen tang, 8602 cho nhom van hanh thu thap va hien thi du lieu da thu thap.'
+priority:
+  impact: 5
+  confidence: 5
+  effort: 3
+  score: 8.33
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: both
+components: []
+tags:
+- ui
+- ux
+investment_question: Toi xem duoc du lieu da thu thap va gui duoc yeu cau nang cap ma khong lan lon chu
+  nang?
+updated: '2026-08-09'
+github:
+  issue: 2
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/2

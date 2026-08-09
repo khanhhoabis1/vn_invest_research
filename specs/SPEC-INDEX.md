@@ -1,0 +1,53 @@
+# CHI MUC SPEC — ban do 1 trang cho nguoi va AI
+
+> Sinh tu dong boi `python tools/specctl.py index`. **Khong sua tay.**
+> Cap nhat: 2026-08-09  |  REQ=6  COMP=11  TASK=0
+
+Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dung.
+
+## Yeu cau (REQ) — can gi & vi sao
+
+| ID | Tieu de | Trang thai | Uu tien | Mat phang | Component |
+|---|---|---|---|---|---|
+| `REQ-0001` | Nen tang chay tren Docker Desktop, toan bo open source cuc bo | draft | 6.25 | both | - |
+| `REQ-0002` | Tach giao dien thanh 2 nhom: Build plane va Ops plane | draft | 8.33 | both | - |
+| `REQ-0003` | Quan ly codebase tu dong voi GitHub theo chuoi spec REQ-COMP-TASK | draft | 5.0 | build | - |
+| `REQ-0004` | Model AI nho truy xuat duoc yeu cau cu de phat trien tiep | draft | 6.67 | build | - |
+| `REQ-0005` | Thu thap tu dong du lieu kinh te vi mo va thi truong CK/BDS Viet Nam | draft | 4.0 | ops | - |
+| `REQ-0006` | Co che ghi nhan tai lieu va chuyen doi sang dang LLM su dung hieu qua | draft | 5.33 | both | - |
+
+## Thanh phan (COMP) — sua o dau
+
+| ID | Ten | Loai | Trang thai | Chu | Duong dan chinh |
+|---|---|---|---|---|---|
+| `COMP-0001` | Docker Compose Stack | infra | planned | ARCH | `docker-compose.yml`, `Dockerfile`, `Makefile` |
+| `COMP-0002` | Worker & Scheduler | service | planned | DE | `vnir/worker/` |
+| `COMP-0003` | Connector Framework | library | planned | DE | `vnir/connectors/` |
+| `COMP-0004` | Source Registry | schema | planned | QA | `vnir/registry/` |
+| `COMP-0005` | UI Build Plane | ui | planned | AIE | `vnir/ui_build/` |
+| `COMP-0006` | UI Ops Plane | ui | planned | DE | `vnir/ui_ops/` |
+| `COMP-0007` | Spec System | library | planned | ARCH | `tools/spec_lib.py`, `tools/specctl.py`, `tools/spec_validate.py` |
+| `COMP-0008` | GitHub Automation | workflow | planned | ARCH | `tools/ghsync.py`, `.github/` |
+| `COMP-0009` | Context Builder | pipeline | planned | AIE | `vnir/context_build.py`, `context/` |
+| `COMP-0010` | Data Quality | library | planned | QA | `vnir/quality/` |
+| `COMP-0011` | API Service | service | planned | ARCH | `vnir/api/` |
+
+## Cong viec (TASK) — lam chinh xac gi
+
+| ID | Tieu de | Trang thai | REQ | COMP | Model | Token |
+|---|---|---|---|---|---|---|
+
+## Cach dung cho AI agent
+
+```bash
+python tools/specctl.py next              # task nao nen lam tiep
+python tools/specctl.py show TASK-0001    # goi thuc thi tu du
+python tools/specctl.py validate          # bat buoc pass truoc khi commit
+```
+
+Commit phai co trailer:
+
+```
+Task-Id: TASK-xxxx
+Req-Id: REQ-xxxx
+```

@@ -20,3 +20,16 @@ Thumbs.db
 # === Local secrets / notes cá nhân ===
 .env
 *.local.md
+
+# === Nen tang moi (vnir) ===
+.venv/
+**/.venv/
+.env
+__pycache__/
+*.pyc
+data/bronze/
+data/silver/
+data/gold/
+logs/
+context/chunks/
+context/index/*.duckdb

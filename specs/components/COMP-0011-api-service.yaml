@@ -1,0 +1,23 @@
+id: COMP-0011
+name: API Service
+kind: service
+status: planned
+created: '2026-08-09'
+owner_role: ARCH
+plane: shared
+purpose: 'API FastAPI phuc vu ca hai UI: quan ly spec, intake, nguon du lieu, lan chay va truy van du
+  lieu'
+paths:
+- vnir/api/
+tech:
+- fastapi
+- asgi-server
+- pydantic
+- duckdb
+requirements:
+- REQ-0001
+risk: medium
+updated: '2026-08-09'
+github:
+  issue: 13
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/13

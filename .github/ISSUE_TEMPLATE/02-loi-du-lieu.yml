@@ -1,0 +1,32 @@
+name: 🐛 Số liệu sai hoặc thiếu
+description: Báo cáo dữ liệu không khớp nguồn gốc, cũ, hoặc thiếu
+title: "[LOI DU LIEU] "
+labels: ["loi-du-lieu", "plane:ops"]
+body:
+  - type: input
+    id: nguon-id
+    attributes:
+      label: Nguồn nào?
+      placeholder: "worldbank.vn_macro_indicators"
+    validations:
+      required: true
+
+  - type: textarea
+    id: sai-the-nao
+    attributes:
+      label: Sai thế nào?
+      description: Ghi rõ **số hệ thống hiển thị** và **số đúng theo nguồn gốc**.
+      placeholder: |
+        Hệ thống hiển thị: GDP 2024 = 470 tỷ USD
+        Nguồn gốc nói:     GDP 2024 = 476,3 tỷ USD
+        Link nguồn gốc:    https://data.worldbank.org/...
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: da-kiem-tra
+    attributes:
+      label: Đã kiểm tra
+      options:
+        - label: Tôi đã mở link nguồn gốc và xác nhận số đúng
+        - label: Tôi đã xem `_manifest.json` trong `data/bronze/`

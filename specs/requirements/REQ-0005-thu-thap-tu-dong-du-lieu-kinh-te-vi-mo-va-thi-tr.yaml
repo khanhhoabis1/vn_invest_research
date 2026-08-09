@@ -1,0 +1,32 @@
+id: REQ-0005
+title: Thu thap tu dong du lieu kinh te vi mo va thi truong CK/BDS Viet Nam
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: Thu muc nay la noi tap trung thu thap du lieu kinh te Viet nam, vi mo va vi mo phuc vu
+    cho hoat dong phan tich va dau tu chung khoan, bat dong san.
+  requested_by: nha-dau-tu
+problem: Du lieu vi mo va thi truong dang phai tra cuu thu cong tung lan, khong co lich su, khong so sanh
+  duoc theo thoi gian, khong biet so lieu lay luc nao va tu dau.
+outcome: Cac connector chay theo lich, do du lieu ve bronze bat bien kem manifest nguon, chuan hoa sang
+  silver/gold; moi con so trace duoc ve URL goc va thoi diem tai.
+priority:
+  impact: 5
+  confidence: 4
+  effort: 5
+  score: 4.0
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: ops
+components: []
+tags:
+- data
+- connector
+- macro
+investment_question: Cac chi bao vi mo va thi truong dang o dau trong chu ky, va thay doi the nao qua
+  thoi gian?
+updated: '2026-08-09'
+github:
+  issue: 17
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/17

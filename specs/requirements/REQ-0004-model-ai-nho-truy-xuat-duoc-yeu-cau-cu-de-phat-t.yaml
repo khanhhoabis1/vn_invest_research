@@ -1,0 +1,31 @@
+id: REQ-0004
+title: Model AI nho truy xuat duoc yeu cau cu de phat trien tiep
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: Co the su dung cac model AI nho van co the truy xuat cac yeu cau tu nen tang cu de phat
+    trien tiep.
+  requested_by: nha-dau-tu
+problem: Model nho khong the doc ca repo; neu bo nho ngu canh chi nam trong chat thi sang phien lam viec
+  sau moi boi canh mat sach, AI se lam lai hoac lam sai.
+outcome: 'Moi TASK la goi thuc thi tu du duoi 6000 token: neu ro file duoc sua, chu ky ham, tieu chi nghiem
+  thu, lenh verify. Co SPEC-INDEX.md va llms.txt lam ban do; model 3B doc la lam duoc.'
+priority:
+  impact: 5
+  confidence: 4
+  effort: 3
+  score: 6.67
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: build
+components: []
+tags:
+- llm
+- context
+- small-model
+investment_question: AI co the tiep tuc phat trien nen tang ma khong can toi giai thich lai tu dau?
+updated: '2026-08-09'
+github:
+  issue: 16
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/16

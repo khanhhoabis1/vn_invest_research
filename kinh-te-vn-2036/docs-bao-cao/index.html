@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinh tế Việt Nam 2026–2036 — Tất cả báo cáo</title>
+<style>
+  :root{--bg:#f4f6fa;--ink:#172033;--muted:#64748b;--accent:#0b2545;--line:#e5eaf2;--card:#fff}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans",sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column}
+  header.top{background:linear-gradient(120deg,#0b2545,#1a3a6c);color:#fff;padding:18px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header.top h1{margin:0;font-size:20px;font-weight:700}
+  header.top p{margin:3px 0 0;font-size:12px;opacity:.85}
+  nav.tabs{background:#fff;border-bottom:1px solid var(--line);padding:0 18px;display:flex;gap:2px;flex-wrap:wrap}
+  nav.tabs button{background:transparent;border:none;padding:12px 18px;font-size:13.5px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;transition:all .15s}
+  nav.tabs button:hover{color:var(--ink);background:#f8fafc}
+  nav.tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+  main{flex:1;display:flex;padding:14px;gap:14px;min-height:0}
+  iframe.viewer{flex:1;border:1px solid var(--line);border-radius:10px;background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+  .meta{position:fixed;bottom:10px;right:14px;background:rgba(15,23,42,.75);color:#e7edf5;padding:6px 12px;border-radius:20px;font-size:11px;backdrop-filter:blur(4px)}
+  @media(max-width:720px){
+    main{flex-direction:column}
+    iframe.viewer{height:70vh}
+    header.top h1{font-size:16px}
+    nav.tabs button{padding:10px 12px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div style="background:#7f1d1d;color:#fff;padding:12px 18px;font-family:system-ui,sans-serif;font-size:14px;line-height:1.55;border-bottom:3px solid #dc2626">
+<strong>&#9888; ẢNH CHỤP LỊCH SỬ — 2024/2025, KHÔNG CÒN CẬP NHẬT</strong><br>
+Số liệu trong trang này thu thập thủ công, phần lớn dẫn nguồn báo chí thứ cấp, <b>không có URL gốc và ngày truy cập</b>.
+Không dùng làm căn cứ ra quyết định đầu tư. Dữ liệu chính thức có kiểm chứng: mở <b>Ops Plane — http://localhost:8602</b>.
+</div>
+
+<header class="top">
+  <div>
+    <h1>📊 Kinh tế Việt Nam 10 năm tới (2026–2036)</h1>
+    <p>Trang tổng hợp tất cả báo cáo · Dữ liệu cập nhật 2024–2025</p>
+  </div>
+</header>
+<nav class="tabs" role="tablist">
+  <button data-src="dashboard-kinh-te-vn-2036.html" class="active">📈 Dashboard chỉ số</button>
+  <button data-src="mindmap-kinh-te-vn-2036.html">🧠 Mind-map</button>
+  <button data-src="lich-su-va-ke-hoach-kinh-te-vn-2036.html">📑 Lịch sử & Kế hoạch</button>
+</nav>
+<main>
+  <iframe id="viewer" class="viewer" src="dashboard-kinh-te-vn-2036.html" title="báo cáo"></iframe>
+</main>
+<div class="meta" id="meta">Đang tải…</div>
+
+<script>
+  const iframe = document.getElementById('viewer');
+  const meta = document.getElementById('meta');
+  const buttons = document.querySelectorAll('nav.tabs button');
+  const files = {
+    'dashboard-kinh-te-vn-2036.html': 'Dashboard Kinh tế VN 2026–2036',
+    'mindmap-kinh-te-vn-2036.html': 'Mind-map Kinh tế VN 2026–2036',
+    'lich-su-va-ke-hoach-kinh-te-vn-2036.html': 'Phân tích lịch sử & Kế hoạch VN 2026–2036',
+  };
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const src = btn.getAttribute('data-src');
+      iframe.src = src;
+      meta.textContent = files[src] || src;
+    });
+  });
+
+  iframe.addEventListener('load', () => {
+    meta.textContent = files[iframe.src.split('/').pop()] || iframe.src;
+  });
+  // init meta
+  meta.textContent = files['dashboard-kinh-te-vn-2036.html'];
+</script>
+</body>
+</html>

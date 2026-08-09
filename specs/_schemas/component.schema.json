@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vn-invest.local/schemas/component.schema.json",
+  "title": "Component (COMP)",
+  "description": "Mot don vi kien truc co the sua doc lap. Tra loi: SUA O DAU.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "kind",
+    "status",
+    "owner_role",
+    "paths",
+    "created"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^COMP-[0-9]{4}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "kind": {
+      "enum": [
+        "service",
+        "connector",
+        "ui",
+        "library",
+        "schema",
+        "pipeline",
+        "infra",
+        "docs",
+        "workflow"
+      ]
+    },
+    "status": {
+      "enum": [
+        "planned",
+        "active",
+        "deprecated",
+        "removed"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "owner_role": {
+      "enum": [
+        "PO",
+        "BA",
+        "ARCH",
+        "DE",
+        "RES",
+        "AIE",
+        "QA",
+        "DOC"
+      ]
+    },
+    "plane": {
+      "enum": [
+        "build",
+        "ops",
+        "shared"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 15
+    },
+    "paths": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "Duong dan file/thu muc thuc te thuoc component nay"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "signature"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "http",
+              "cli",
+              "python",
+              "env",
+              "file",
+              "sql",
+              "docker"
+            ]
+          },
+          "signature": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "stability": {
+            "enum": [
+              "experimental",
+              "stable",
+              "frozen",
+              "deprecated"
+            ]
+          }
+        }
+      }
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^COMP-[0-9]{4}$"
+      }
+    },
+    "tech": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Lenh chay test cho component"
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^REQ-[0-9]{4}$"
+      }
+    },
+    "adr": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issue": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

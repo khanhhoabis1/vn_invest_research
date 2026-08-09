@@ -1,0 +1,32 @@
+id: REQ-0003
+title: Quan ly codebase tu dong voi GitHub theo chuoi spec REQ-COMP-TASK
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: Codebase can quan ly tu dong voi github, dam bao phan tich cac yeu cau, tach thanh cac
+    thanh phan phu hop, dam bao cac phien ban dieu chinh cai tien co the duoc cac model AI du hieu va
+    thuc thi that.
+  requested_by: nha-dau-tu
+problem: Yeu cau hien chi ton tai dang van xuoi trong chat; khong tach thanh phan, khong co phien ban,
+  model AI ve sau khong hieu vi sao code ton tai va khong thuc thi tiep duoc.
+outcome: Moi yeu cau duoc phan ra thanh REQ/COMP/TASK co ID vinh vien, kiem dinh bang JSON Schema, dong
+  bo tu dong sang GitHub Issue/PR, CI chan commit khong co Task-Id.
+priority:
+  impact: 5
+  confidence: 4
+  effort: 4
+  score: 5.0
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: build
+components: []
+tags:
+- github
+- spec
+- ci
+investment_question: Thay doi nao cung truy vet duoc ve yeu cau goc de danh gia dung uu tien?
+updated: '2026-08-09'
+github:
+  issue: 15
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/15

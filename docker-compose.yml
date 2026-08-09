@@ -1,0 +1,145 @@
+# VN Invest Research Platform — stack cuc bo, 100% open source
+# Chay: docker compose up -d          (lop loi, ~3.4GB RAM)
+#       docker compose --profile ai up -d   (them qdrant + ollama)
+
+name: vnir
+
+x-common: &common
+  restart: unless-stopped
+  env_file: [.env]
+  networks: [vnir]
+
+services:
+
+  # ---------------------------------------------------------------- metadata store
+  db:
+    <<: *common
+    image: postgres:16-alpine          # PostgreSQL License (open source)
+    container_name: vnir-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vnir}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vnir_local_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-vnir}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports: ["${DB_PORT:-5433}:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./vnir/db/init:/docker-entrypoint-initdb.d:ro
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-vnir} -d ${POSTGRES_DB:-vnir}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  # ---------------------------------------------------------------- API
+  api:
+    <<: *common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: vnir-api
+    command: >
+      python -m uvicorn vnir.api.main:app
+      --host 0.0.0.0 --port 8000 --workers 1
+    ports: ["${API_PORT:-8000}:8000"]
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    mem_limit: 768m
+    depends_on:
+      db: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health',timeout=4).status==200 else 1)"]
+      interval: 15s
+      timeout: 8s
+      retries: 8
+      start_period: 30s
+
+  # ---------------------------------------------------------------- worker + scheduler
+  worker:
+    <<: *common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: vnir-worker
+    command: ["python", "-m", "vnir.worker.main"]
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    mem_limit: 1g
+    depends_on:
+      db: {condition: service_healthy}
+      api: {condition: service_started}
+
+  # ---------------------------------------------------------------- UI nhom A: Build plane
+  ui-build:
+    <<: *common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: vnir-ui-build
+    command: >
+      streamlit run vnir/ui_build/app.py
+      --server.port=8601 --server.address=0.0.0.0
+      --server.headless=true --browser.gatherUsageStats=false
+    ports: ["${UI_BUILD_PORT:-8601}:8601"]
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    mem_limit: 512m
+    depends_on:
+      api: {condition: service_started}
+
+  # ---------------------------------------------------------------- UI nhom B: Ops plane
+  ui-ops:
+    <<: *common
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: vnir-ui-ops
+    command: >
+      streamlit run vnir/ui_ops/app.py
+      --server.port=8602 --server.address=0.0.0.0
+      --server.headless=true --browser.gatherUsageStats=false
+    ports: ["${UI_OPS_PORT:-8602}:8602"]
+    volumes:
+      - ./:/workspace
+    working_dir: /workspace
+    mem_limit: 640m
+    depends_on:
+      api: {condition: service_started}
+
+  # ---------------------------------------------------------------- profile "ai" (tuy chon)
+  qdrant:
+    <<: *common
+    image: qdrant/qdrant:v1.12.4       # Apache-2.0
+    container_name: vnir-qdrant
+    profiles: ["ai"]
+    ports: ["${QDRANT_PORT:-6333}:6333"]
+    volumes: [qdrant_data:/qdrant/storage]
+    mem_limit: 768m
+
+  ollama:
+    <<: *common
+    image: ollama/ollama:latest        # MIT
+    container_name: vnir-ollama
+    profiles: ["ai"]
+    ports: ["${OLLAMA_PORT:-11434}:11434"]
+    volumes: [ollama_models:/root/.ollama]
+    mem_limit: 4g
+
+networks:
+  vnir:
+    driver: bridge
+
+volumes:
+  pgdata:
+  qdrant_data:
+  ollama_models:

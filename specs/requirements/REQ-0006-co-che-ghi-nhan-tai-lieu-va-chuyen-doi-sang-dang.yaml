@@ -1,0 +1,31 @@
+id: REQ-0006
+title: Co che ghi nhan tai lieu va chuyen doi sang dang LLM su dung hieu qua
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: Thiet lap co che ghi nhan tai lieu. Co che ha tang cho phep ghi nhan tai lieu, yeu cau
+    o dang van ban va o dang chuyen doi sang cac dang luu tru ma cac LLM co the su dung hieu qua.
+  requested_by: nha-dau-tu
+problem: Tai lieu nghien cuu nam rai rac dang markdown dai; LLM phai doc nguyen file ton ngu canh, de
+  bo sot va de tra loi khong kem nguon.
+outcome: 'Pipeline build context: tai lieu duoc chunk theo heading kem front-matter, sinh llms.txt, catalog
+  DuckDB va facts co nguon; LLM tra loi luon kem nguon va as-of date.'
+priority:
+  impact: 4
+  confidence: 4
+  effort: 3
+  score: 5.33
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: both
+components: []
+tags:
+- docs
+- context
+- rag
+investment_question: LLM tra loi ve kho nay co dung va co dan nguon khong?
+updated: '2026-08-09'
+github:
+  issue: 18
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/18

@@ -1,0 +1,37 @@
+[project]
+name = "vnir"
+version = "0.1.0"
+description = "Nen tang thu thap va phan tich du lieu kinh te Viet Nam"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [".venv", "data", "archive", "kinh-te-vn-2036", "__pycache__"]
+
+[tool.ruff.lint]
+# Chon bo luat bat LOI THAT, khong bat phong cach vun vat.
+select = [
+    "E",    # pycodestyle — loi dinh dang nghiem trong
+    "F",    # pyflakes    — bien khong dung, import thua, ten sai
+    "I",    # isort       — thu tu import
+    "B",    # bugbear     — bay logic pho bien
+    "UP",   # pyupgrade   — cu phap loi thoi
+    "SIM",  # simplify    — code long vong
+    "RUF",  # ruff riêng
+]
+ignore = [
+    "E501",    # do dai dong — da co formatter lo
+    "B008",    # goi ham trong tham so mac dinh — FastAPI Depends() can dieu nay
+    "RUF001",  # ky tu unicode giong nhau — tieng Viet co dau bi bao nham
+    "RUF002",
+    "RUF003",
+    "SIM105",  # contextlib.suppress — try/except/pass ro rang hon cho nguoi doc
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Script CLI duoc phep in ra man hinh va dung subprocess tu do
+"tools/*.py" = ["T201", "S603", "S607"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["vnir"]

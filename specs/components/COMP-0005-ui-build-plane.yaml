@@ -1,0 +1,19 @@
+id: COMP-0005
+name: UI Build Plane
+kind: ui
+status: planned
+created: '2026-08-09'
+owner_role: AIE
+plane: build
+purpose: 'Giao dien nhom A: gui yeu cau, phan ra spec bang AI, duyet, dong bo GitHub, theo doi PR'
+paths:
+- vnir/ui_build/
+tech:
+- streamlit
+requirements:
+- REQ-0002
+risk: low
+updated: '2026-08-09'
+github:
+  issue: 7
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/7
