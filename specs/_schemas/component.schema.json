@@ -41,6 +41,7 @@
       "enum": [
         "planned",
         "active",
+        "done",
         "deprecated",
         "removed"
       ]

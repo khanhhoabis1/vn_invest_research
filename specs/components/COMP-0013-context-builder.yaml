@@ -1,0 +1,21 @@
+id: COMP-0013
+name: Context Builder (raw -> curated)
+kind: service
+status: planned
+created: "2026-08-09"
+owner_role: DE
+plane: ops
+purpose: |
+  Module CleanTransform chuan hoa du lieu thao tu nhieu nguon ve schema chung, tinh chi
+  so phai sinh (PE/PB/ROE/tang truong), ghi log day du.
+paths:
+  - vnir/context_build.py
+tech:
+  - python
+  - pandas
+  - postgres
+tests:
+  - tests/test_context_build.py
+notes: |
+  Raw da thu phai duoc chuan hoa thanh bang curated trong Postgres. Chi so phai sinh
+  tinh tu raw co that, truy van duoc qua API /evidence. Chay voi 1-2 ma VN mau.

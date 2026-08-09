@@ -1,0 +1,34 @@
+id: REQ-0009
+title: AnalyticsEngine va RecommendEngine (dinh gia, scoring, gia muc tieu)
+status: draft
+created: "2026-08-09"
+origin:
+  channel: track-cli
+  raw_request: "Xay dung engine tinh dinh gia, cham diem da yeu to, tong hop khuyen nghi danh muc va gia muc tieu cho co phieu VN."
+  requested_by: nha-dau-tu
+  requested_at: "2026-08-09"
+problem: |
+  Chua co engine tu dong bien du lieu curated thanh khuyen nghi. Moi danh gia dau
+  tu hien la thu cong, khong co bang chung lien ket ve du lieu goc.
+outcome: |
+  He thong tu dong sinh khuyen nghi co bang chung cho 1 ma (VNM/VND): scoring 0-100,
+  gia muc tieu, va canh bao khi can nguoi duyet.
+priority:
+  impact: 5
+  confidence: 4
+  effort: 4
+acceptance:
+  - "Tu data curated -> ra 1 khuyen nghi co bang chung cho 1 ma."
+  - "Scoring theo trong so Valuation25/Quality25/Momentum20/Growth20/Risk10."
+  - "Gia muc tieu = trung binh PT1(PE 70%) + PT2(DCF 30%), in ro gia dinh."
+  - "Upside >+50% hoac <-30% -> vao pending_review.json cho nguoi duyet."
+plane: build
+components:
+  - COMP-0012
+tags:
+  - mvp
+  - p2
+  - engine
+notes: |
+  Khung chi tiet: squad/05-design/MVP-ENGINE.md (6 nhom tin hieu, guardrail chong bi a).
+  Khong dung LLM/ML nang sinh so tu do.

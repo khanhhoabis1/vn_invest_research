@@ -1,7 +1,7 @@
 # CHI MUC SPEC — ban do 1 trang cho nguoi va AI
 
 > Sinh tu dong boi `python tools/specctl.py index`. **Khong sua tay.**
-> Cap nhat: 2026-08-09  |  REQ=7  COMP=11  TASK=0
+> Cap nhat: 2026-08-09  |  REQ=10  COMP=13  TASK=0
 
 Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dung.
 
@@ -16,6 +16,9 @@ Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dun
 | `REQ-0005` | Thu thap tu dong du lieu kinh te vi mo va thi truong CK/BDS Viet Nam | draft | 4.0 | ops | - |
 | `REQ-0006` | Co che ghi nhan tai lieu va chuyen doi sang dang LLM su dung hieu qua | draft | 5.33 | both | - |
 | `REQ-0007` | Can luong lay du lieu: Gia co phieu VNM theo ngay | draft | 6.67 | ops | - |
+| `REQ-0008` | Thu thap tu dong du lieu thi truong CK/BDS Viet Nam | draft | - | ops | COMP-0012, COMP-0013 |
+| `REQ-0009` | AnalyticsEngine va RecommendEngine (dinh gia, scoring, gia muc tieu) | draft | - | build | COMP-0012 |
+| `REQ-0010` | Co che ghi nhan tai lieu va chuyen doi sang dang LLM | draft | - | build | - |
 
 ## Thanh phan (COMP) — sua o dau
 
@@ -32,6 +35,8 @@ Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dun
 | `COMP-0009` | Context Builder | pipeline | planned | AIE | `vnir/context_build.py`, `context/` |
 | `COMP-0010` | Data Quality | library | planned | QA | `vnir/quality/` |
 | `COMP-0011` | API Service | service | done | ARCH | `vnir/api/` |
+| `COMP-0012` | Data Quality & EvidenceLedger | service | planned | QA | `vnir/evidence/` |
+| `COMP-0013` | Context Builder (raw -> curated) | service | planned | DE | `vnir/context_build.py` |
 
 ## Cong viec (TASK) — lam chinh xac gi
 

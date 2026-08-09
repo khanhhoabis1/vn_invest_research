@@ -1,0 +1,20 @@
+id: COMP-0012
+name: Data Quality & EvidenceLedger
+kind: service
+status: planned
+created: "2026-08-09"
+owner_role: QA
+plane: ops
+purpose: |
+  Dam bao moi so lieu dau ra deu trace nguoc duoc ve raw record + source URL. Tu choi
+  so khong co bang chung. Day la thanh bao ve chong bi a so lieu cua platform.
+paths:
+  - vnir/evidence/
+tech:
+  - python
+  - postgres
+tests:
+  - tests/test_evidence.py
+notes: |
+  Sanity check: PE>100 hoac <0, EPS<=0, gia<=0 -> bao loi. NULL bi bo qua (availability
+  weighting). >40% tin hieu cua ma la NULL -> loai ma. Xem MVP-ENGINE.md (guardrail).

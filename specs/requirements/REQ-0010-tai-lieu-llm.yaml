@@ -1,0 +1,31 @@
+id: REQ-0010
+title: Co che ghi nhan tai lieu va chuyen doi sang dang LLM
+status: draft
+created: "2026-08-09"
+origin:
+  channel: track-cli
+  raw_request: "Xay dung luong ghi nhan tai lieu nghien cuu va chuyen doi sang dang LLM doc hieu qua (chunks + llms.txt)."
+  requested_by: nha-dau-tu
+  requested_at: "2026-08-09"
+problem: |
+  Tai lieu nghien cuu (bao cao nganh, nhan dinh) nam roi rac, khong the dung lam
+  tri thuc nen de giai thich khuyen nghi hay ho tro ReviewGate.
+outcome: |
+  Co thu muc tiep nhan tai lieu va script tach chunk co metadata, sinh llms.txt de
+  agent truy xuat nhanh. Tai lieu cu duoc danh nhan do tin cay.
+priority:
+  impact: 3
+  confidence: 4
+  effort: 2
+acceptance:
+  - "Co thu muc tiep nhan tai lieu (markdown/pdf) va script tach chunk co metadata."
+  - "Sinh file llms.txt tom tat de agent/LLM truy xuat nhanh."
+  - "Tai lieu cu duoc danh nhan do tin cay, khong trat len voi data that."
+plane: build
+tags:
+  - mvp
+  - p2
+  - docs
+notes: |
+  Tai lieu cu: context/facts/legacy-2024-2025.md. Khong tu dong rut khuyen nghi tu
+  tai lieu khong co so so lieu.

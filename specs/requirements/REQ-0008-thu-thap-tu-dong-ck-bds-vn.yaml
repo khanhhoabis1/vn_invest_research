@@ -1,0 +1,35 @@
+id: REQ-0008
+title: Thu thap tu dong du lieu thi truong CK/BDS Viet Nam
+status: draft
+created: "2026-08-09"
+origin:
+  channel: track-cli
+  raw_request: "Thay the connector World Bank hay loi 502 bang luong thu thap da nguon tu cac nguon mo truy cap duoc tu VN (GSO/SSI/KBS/VNDirect/vnstock)."
+  requested_by: nha-dau-tu
+  requested_at: "2026-08-09"
+problem: |
+  Connector World Bank hien tai hay tra 502 ngau nhien, chi lay duoc 7/14 chi so,
+  khong co nguon gia co phieu VN. Thieu du lieu thuc te de phan tich dau tu.
+outcome: |
+  Co it nhat 1 connector chay that lay duoc du lieu VN vao RawStore; du lieu vi mo
+  it nhat 10 chi so tu GSO hoac WB; neu nguon chet thi danh dau thieu, khong sinh so.
+priority:
+  impact: 5
+  confidence: 4
+  effort: 3
+acceptance:
+  - "Co it nhat 1 connector chay that lay duoc du lieu vao RawStore (khong chi schema)."
+  - "Neu nguon chet (502/000/403) he thong danh dau thieu, bao loi, KHONG sinh so thay."
+  - "Du lieu vi mo it nhat 10 chi so VN tu GSO hoac WB."
+  - "Toan bo endpoint kiem chung bang curl thuc te (xem vnir/registry/nguon-*.md)."
+plane: ops
+components:
+  - COMP-0012
+  - COMP-0013
+tags:
+  - mvp
+  - p1
+  - ingest
+notes: |
+  Catalog nguon: vnir/registry/nguon-vi-mo.md (15 nguon) va vnir/registry/nguon-ck-bds.md (18 nguon).
+  Uu tien GSO PX-Web (API noi dia on dinh nhat) thay World Bank.
