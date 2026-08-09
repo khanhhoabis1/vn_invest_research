@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "ky_cap_nhat": "2024–2025",
+    "nguon_chung": "GSO/TCTK, World Bank, IMF, AMRO, UNFPA, Reuters, Trade.gov, IEA/REDS, FiinGroup, TheGlobalEconomy",
+    "luu_y": "Một số chỉ số là ước tính tham khảo (đánh dấu *), cần rà soát định kỳ tại data-nguon/."
+  },
+  "branches": {
+    "01-vi-mo-tang-truong": [
+      [
+        "GDP 2024 (giá hiện hành)",
+        "11.511,9 nghìn tỷ VND (~470 tỷ USD)",
+        "TCTK"
+      ],
+      [
+        "Tăng trưởng GDP 2024",
+        "7,09%",
+        "VietnamNet/TCTK"
+      ],
+      [
+        "GDP/người 2025",
+        "5.066 USD (2023: ~4.500 USD)",
+        "World Bank"
+      ],
+      [
+        "Lạm phát CPI 2024",
+        "3,63%",
+        "VietnamNet"
+      ],
+      [
+        "Tỷ giá bình quân 2024",
+        "23.150 VND/USD",
+        "AMRO"
+      ],
+      [
+        "Nợ công/GDP 2024",
+        "33,4% (2023: 34,5%)",
+        "AMRO/IMF"
+      ]
+    ],
+    "02-dan-so-lao-dong": [
+      [
+        "Dân số (2023)",
+        "~100,3 triệu",
+        "TCTK"
+      ],
+      [
+        "Tổng tỷ suất sinh (TFR) 2024",
+        "1,91 (dưới mức thay thế 2,1, năm thứ 3)",
+        "VnExpress/Asia Times"
+      ],
+      [
+        "Già hóa",
+        "Bước vào giai đoạn già hóa 2011; 'xã hội già' (65+≥14%) dự báo sau 2036",
+        "UNFPA/Vietnam Law"
+      ],
+      [
+        "Tỷ lệ đô thị hóa 2024",
+        "38,5%",
+        "Statista"
+      ]
+    ],
+    "03-cong-nghiep-chuoi-cung-ung": [
+      [
+        "FDI đăng ký 2024",
+        "~38,23 tỷ USD (+4,4%)",
+        "Lexology/VIR"
+      ],
+      [
+        "FDI giải ngân 2024",
+        "Kỷ lục 25,35 tỷ USD (+8–11,8%)",
+        "VIR/VNA"
+      ],
+      [
+        "Tỷ trọng FDI vào chế biến, chế tạo",
+        "83%",
+        "VNA"
+      ],
+      [
+        "Lũy kế FDI đến hết 2025",
+        "~521 tỷ USD, ~43.000 dự án",
+        "Mekong Capital"
+      ]
+    ],
+    "04-chuyen-doi-so-ai": [
+      [
+        "Quy mô kinh tế số 2024",
+        "~18% GDP (~36 tỷ USD), +20% YoY",
+        "GSO/Trade.gov"
+      ],
+      [
+        "Mục tiêu kinh tế số",
+        "20% GDP (2025) · 30% GDP (2030)",
+        "Nghị quyết/SCI Direct"
+      ]
+    ],
+    "05-nang-luong-xanh": [
+      [
+        "Công suất tái tạo (điện gió+mặt trời) 2024",
+        "~21.447 MW (~26% tổng công suất)",
+        "REDS/LinkedIn"
+      ],
+      [
+        "Điện mặt trời",
+        "~18,6 GW",
+        "REN21"
+      ],
+      [
+        "Cam kết Net Zero",
+        "2050",
+        "COP/UNFCCC"
+      ]
+    ],
+    "06-bat-dong-san-do-thi": [
+      [
+        "Tỷ lệ đô thị hóa 2024",
+        "38,5%",
+        "Statista"
+      ],
+      [
+        "Giai đoạn thị trường",
+        "Phục hồi & tái cấu trúc sau chu kỳ điều chỉnh 2022–2025",
+        "Nhận định chung"
+      ]
+    ],
+    "07-tai-chinh-ngan-hang": [
+      [
+        "Vốn hóa TTCK/GDP 2024",
+        "42,96% (2025: 61,4%)",
+        "TheGlobalEconomy"
+      ],
+      [
+        "Tỷ lệ nợ xấu (NPL) hệ thống",
+        "~4,5%* (xu hướng tăng nhưng chậm lại)",
+        "FiinGroup ước"
+      ],
+      [
+        "Tín dụng/GDP",
+        "Mức cao, ~125%* (cần thận trọng)",
+        "Ước/BIS"
+      ]
+    ],
+    "08-nong-nghiep-ben-vung": [
+      [
+        "Trọng tâm",
+        "Nông nghiệp công nghệ cao, thích ứng biến đổi khí hậu ĐBSCL",
+        "Bộ NN&PTNT"
+      ],
+      [
+        "Số liệu cụ thể",
+        "Cập nhật sau (chưa tra cứu đợt này)",
+        "—"
+      ]
+    ],
+    "09-thuong-mai-hoi-nhap": [
+      [
+        "Tổng kim ngạch XNK 2024",
+        "~800 tỷ USD (kỷ lục, từ 732 tỷ USD năm 2022)",
+        "VietnamPlus/NhanDan"
+      ],
+      [
+        "Thặng dư thương mại với Mỹ 2024",
+        "~123 tỷ USD (kỷ lục)",
+        "Reuters"
+      ],
+      [
+        "Hiệp định FTA",
+        "EVFTA, CPTPP, RCEP đang khai thác",
+        "Bộ Công Thương"
+      ]
+    ],
+    "10-doanh-nghiep-khoi-nghiep": [
+      [
+        "Trọng tâm",
+        "Khu vực tư nhân, startup phục hồi sau thắt chặt 2022–2024",
+        "Bộ KH&ĐT/WEF"
+      ],
+      [
+        "Số liệu cụ thể",
+        "Cập nhật sau (chưa tra cứu đợt này)",
+        "—"
+      ]
+    ]
+  }
+}

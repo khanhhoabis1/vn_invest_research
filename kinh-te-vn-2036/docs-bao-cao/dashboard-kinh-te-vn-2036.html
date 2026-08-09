@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Kinh tế Việt Nam 2026–2036</title>
+<style>
+  :root { --bg:#f4f6fa; --ink:#1a2233; --muted:#64748b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
+         background:var(--bg); color:var(--ink); line-height:1.5; }
+  header.top { background:linear-gradient(120deg,#0b2545,#13315c); color:#fff; padding:34px 28px 26px; }
+  header.top h1 { margin:0 0 6px; font-size:26px; }
+  header.top p { margin:2px 0; font-size:13px; opacity:.85; }
+  .wrap { max-width:1180px; margin:0 auto; padding:22px 18px 60px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; margin:18px 0 28px; }
+  .kpi { background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 16px;
+          box-shadow:0 1px 3px rgba(15,23,42,.06); }
+  .kpi-v { font-size:21px; font-weight:700; color:#0b2545; }
+  .kpi-k { font-size:12.5px; margin-top:3px; color:var(--ink); }
+  .kpi-s { font-size:11px; color:var(--muted); margin-top:2px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:18px; }
+  .card { background:#fff; border:1px solid #e2e8f0; border-top:4px solid var(--accent,#1F4E78);
+          border-radius:12px; padding:16px 16px 14px; box-shadow:0 1px 3px rgba(15,23,42,.05); }
+  .card header { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .card .dot { width:10px; height:10px; border-radius:50%; background:var(--accent,#1F4E78); }
+  .card h2 { font-size:16px; margin:0; }
+  .card code { font-size:11px; color:var(--muted); background:#f1f5f9; padding:2px 6px; border-radius:5px; margin-left:auto; }
+  .card .desc { font-size:12.5px; color:var(--muted); margin:8px 0 10px; }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th,td { text-align:left; padding:6px 8px; border-bottom:1px solid #eef2f7; vertical-align:top; }
+  th { font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); }
+  td.v { font-weight:600; color:#0b2545; }
+  td.s { color:var(--muted); font-size:11px; white-space:nowrap; }
+  .subs { margin-top:10px; }
+  .tag { display:inline-block; background:#eef2ff; color:#3730a3; font-size:11px;
+          padding:3px 8px; border-radius:20px; margin:2px 4px 2px 0; }
+  .matrix { margin-top:34px; }
+  .matrix h2 { font-size:18px; color:#0b2545; }
+  .matrix table { background:#fff; border:1px solid #e2e8f0; border-radius:10px; overflow:hidden; }
+  .matrix input { width:100%; border:1px solid #d4dae3; border-radius:6px; padding:5px 7px; font-size:12px; }
+  .note { font-size:11.5px; color:var(--muted); margin-top:14px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>📊 Dashboard Kinh tế Việt Nam 10 năm tới (2026–2036)</h1>
+  <p>Kỳ dữ liệu: 2024–2025</p>
+  <p>Nguồn: GSO/TCTK, World Bank, IMF, AMRO, UNFPA, Reuters, Trade.gov, IEA/REDS, FiinGroup, TheGlobalEconomy</p>
+</header>
+<div class="wrap">
+  <div class="kpis"><div class="kpi"><div class="kpi-v">5.066 USD</div><div class="kpi-k">GDP/người (2025)</div><div class="kpi-s">World Bank</div></div><div class="kpi"><div class="kpi-v">7,09%</div><div class="kpi-k">Tăng trưởng GDP 2024</div><div class="kpi-s">TCTK</div></div><div class="kpi"><div class="kpi-v">3,63%</div><div class="kpi-k">Lạm phát CPI 2024</div><div class="kpi-s">VietnamNet</div></div><div class="kpi"><div class="kpi-v">33,4%</div><div class="kpi-k">Nợ công/GDP 2024</div><div class="kpi-s">AMRO/IMF</div></div><div class="kpi"><div class="kpi-v">25,35 tỷ USD</div><div class="kpi-k">FDI giải ngân 2024</div><div class="kpi-s">VIR</div></div><div class="kpi"><div class="kpi-v">~800 tỷ USD</div><div class="kpi-k">Tổng XNK 2024</div><div class="kpi-s">VietnamPlus</div></div><div class="kpi"><div class="kpi-v">~18%</div><div class="kpi-k">Kinh tế số/GDP 2024</div><div class="kpi-s">GSO</div></div><div class="kpi"><div class="kpi-v">~26% công suất</div><div class="kpi-k">Điện tái tạo</div><div class="kpi-s">REDS</div></div><div class="kpi"><div class="kpi-v">38,5%</div><div class="kpi-k">Tỷ lệ đô thị hóa 2024</div><div class="kpi-s">Statista</div></div><div class="kpi"><div class="kpi-v">1,91</div><div class="kpi-k">TFR (tỷ suất sinh) 2024</div><div class="kpi-s">VnExpress</div></div></div>
+  <div class="grid">
+    <section class="card" style="--accent:#1F4E78">
+      <header>
+        <span class="dot"></span>
+        <h2>Vĩ mô &amp; Tăng trưởng</h2>
+        <code>01-vi-mo-tang-truong</code>
+      </header>
+      <p class="desc">Trajectory tăng trưởng GDP, năng suất, ổn định vĩ mô (lạm phát, tỷ giá, lãi suất), chính sách tài khóa – tiền tệ và rủi ro chu kỳ.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">GDP 2024 (giá hiện hành)</td><td class="v">11.511,9 nghìn tỷ VND (~470 tỷ USD)</td><td class="s">TCTK</td></tr><tr><td class="m">Tăng trưởng GDP 2024</td><td class="v">7,09%</td><td class="s">VietnamNet/TCTK</td></tr><tr><td class="m">GDP/người 2025</td><td class="v">5.066 USD (2023: ~4.500 USD)</td><td class="s">World Bank</td></tr><tr><td class="m">Lạm phát CPI 2024</td><td class="v">3,63%</td><td class="s">VietnamNet</td></tr><tr><td class="m">Tỷ giá bình quân 2024</td><td class="v">23.150 VND/USD</td><td class="s">AMRO</td></tr><tr><td class="m">Nợ công/GDP 2024</td><td class="v">33,4% (2023: 34,5%)</td><td class="s">AMRO/IMF</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#2E7D32">
+      <header>
+        <span class="dot"></span>
+        <h2>Dân số &amp; Lao động</h2>
+        <code>02-dan-so-lao-dong</code>
+      </header>
+      <p class="desc">Cửa sổ dân số vàng đóng lại, già hóa dân số, dịch chuyển cơ cấu lao động, kỹ năng và đô thị hóa.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Dân số (2023)</td><td class="v">~100,3 triệu</td><td class="s">TCTK</td></tr><tr><td class="m">Tổng tỷ suất sinh (TFR) 2024</td><td class="v">1,91 (dưới mức thay thế 2,1)</td><td class="s">VnExpress</td></tr><tr><td class="m">Già hóa</td><td class="v">Giai đoạn già hóa từ 2011; &#x27;xã hội già&#x27; (65+≥14%) sau 2036</td><td class="s">UNFPA</td></tr><tr><td class="m">Tỷ lệ đô thị hóa 2024</td><td class="v">38,5%</td><td class="s">Statista</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#E65100">
+      <header>
+        <span class="dot"></span>
+        <h2>Công nghiệp &amp; Chuỗi cung ứng</h2>
+        <code>03-cong-nghiep-chuoi-cung-ung</code>
+      </header>
+      <p class="desc">Vị thế Việt Nam trong làn sóng dịch chuyển chuỗi cung ứng toàn cầu (China+1), FDI chất lượng, bán dẫn – điện tử và logistics.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">FDI đăng ký 2024</td><td class="v">~38,23 tỷ USD (+4,4%)</td><td class="s">Lexology/VIR</td></tr><tr><td class="m">FDI giải ngân 2024</td><td class="v">Kỷ lục 25,35 tỷ USD</td><td class="s">VIR/VNA</td></tr><tr><td class="m">Tỷ trọng FDI vào chế biến, chế tạo</td><td class="v">83%</td><td class="s">VNA</td></tr><tr><td class="m">Lũy kế FDI đến hết 2025</td><td class="v">~521 tỷ USD, ~43.000 dự án</td><td class="s">Mekong Capital</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#6A1B9A">
+      <header>
+        <span class="dot"></span>
+        <h2>Chuyển đổi số &amp; AI</h2>
+        <code>04-chuyen-doi-so-ai</code>
+      </header>
+      <p class="desc">Tác động của AI, kinh tế số, thương mại điện tử, fintech và chính phủ số tới năng suất và mô hình tăng trưởng mới.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Quy mô kinh tế số 2024</td><td class="v">~18% GDP (~36 tỷ USD), +20% YoY</td><td class="s">GSO/Trade.gov</td></tr><tr><td class="m">Mục tiêu kinh tế số</td><td class="v">20% GDP (2025) · 30% GDP (2030)</td><td class="s">Nghị quyết</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#00838F">
+      <header>
+        <span class="dot"></span>
+        <h2>Năng lượng &amp; Chuyển đổi xanh</h2>
+        <code>05-nang-luong-xanh</code>
+      </header>
+      <p class="desc">Lộ trình Net Zero 2050, chuyển dịch năng lượng (điện tái tạo, điện khí), giao thông xanh và tài chính khí hậu.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Công suất tái tạo 2024</td><td class="v">~21.447 MW (~26% tổng công suất)</td><td class="s">REDS</td></tr><tr><td class="m">Điện mặt trời</td><td class="v">~18,6 GW</td><td class="s">REN21</td></tr><tr><td class="m">Cam kết Net Zero</td><td class="v">2050</td><td class="s">COP/UNFCCC</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#AD1457">
+      <header>
+        <span class="dot"></span>
+        <h2>Bất động sản &amp; Đô thị</h2>
+        <code>06-bat-dong-san-do-thi</code>
+      </header>
+      <p class="desc">Chu kỳ phục hồi và tái cấu trúc thị trường BĐS, nhà ở xã hội, phát triển đô thị và hạ tầng kết nối.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Tỷ lệ đô thị hóa 2024</td><td class="v">38,5%</td><td class="s">Statista</td></tr><tr><td class="m">Giai đoạn thị trường</td><td class="v">Phục hồi &amp; tái cấu trúc sau điều chỉnh 2022–2025</td><td class="s">Nhận định</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#283593">
+      <header>
+        <span class="dot"></span>
+        <h2>Tài chính &amp; Ngân hàng</h2>
+        <code>07-tai-chinh-ngan-hang</code>
+      </header>
+      <p class="desc">Sức khỏe hệ thống ngân hàng, thị trường vốn, fintech và vai trò huy động vốn dài hạn.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Vốn hóa TTCK/GDP 2024</td><td class="v">42,96% (2025: 61,4%)</td><td class="s">TheGlobalEconomy</td></tr><tr><td class="m">Nợ xấu (NPL) hệ thống</td><td class="v">~4,5%* (xu hướng tăng nhưng chậm lại)</td><td class="s">FiinGroup ước</td></tr><tr><td class="m">Tín dụng/GDP</td><td class="v">Mức cao ~125%* (thận trọng)</td><td class="s">Ước/BIS</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#558B2F">
+      <header>
+        <span class="dot"></span>
+        <h2>Nông nghiệp &amp; Bền vững</h2>
+        <code>08-nong-nghiep-ben-vung</code>
+      </header>
+      <p class="desc">Nông nghiệp công nghệ cao, an ninh lương thực, sinh kế nông thôn và thích ứng biến đổi khí hậu.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Trọng tâm</td><td class="v">Nông nghiệp công nghệ cao, thích ứng BĐKH ĐBSCL</td><td class="s">Bộ NN&amp;PTNT</td></tr><tr><td class="m">Số liệu cụ thể</td><td class="v">Cập nhật sau (chưa tra cứu đợt này)</td><td class="s">—</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#4527A0">
+      <header>
+        <span class="dot"></span>
+        <h2>Thương mại &amp; Hội nhập</h2>
+        <code>09-thuong-mai-hoi-nhap</code>
+      </header>
+      <p class="desc">Khai thác EVFTA/CPTPP/RCEP, định hình lại quan hệ Mỹ–Trung, mở rộng thị trường mới.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Tổng kim ngạch XNK 2024</td><td class="v">~800 tỷ USD (kỷ lục)</td><td class="s">VietnamPlus</td></tr><tr><td class="m">Thặng dư TM với Mỹ 2024</td><td class="v">~123 tỷ USD (kỷ lục)</td><td class="s">Reuters</td></tr><tr><td class="m">Hiệp định FTA</td><td class="v">EVFTA, CPTPP, RCEP đang khai thác</td><td class="s">Bộ Công Thương</td></tr></tbody>
+      </table>
+      
+    </section>
+    <section class="card" style="--accent:#004D40">
+      <header>
+        <span class="dot"></span>
+        <h2>Doanh nghiệp &amp; Khởi nghiệp</h2>
+        <code>10-doanh-nghiep-khoi-nghiep</code>
+      </header>
+      <p class="desc">Sức khỏe khu vực tư nhân, tập đoàn tư nhân lớn, SME, hệ sinh thái khởi nghiệp và đổi mới sáng tạo.</p>
+      <table>
+        <thead><tr><th>Chỉ số</th><th>Giá trị (2024–2025)</th><th>Nguồn</th></tr></thead>
+        <tbody><tr><td class="m">Trọng tâm</td><td class="v">Khu vực tư nhân, startup phục hồi sau thắt chặt 2022–2024</td><td class="s">Bộ KH&amp;ĐT</td></tr><tr><td class="m">Số liệu cụ thể</td><td class="v">Cập nhật sau (chưa tra cứu đợt này)</td><td class="s">—</td></tr></tbody>
+      </table>
+      
+    </section></div>
+
+  <div class="matrix">
+    <h2>Ma trận theo dõi chỉ số (cập nhật định kỳ)</h2>
+    <table>
+      <thead><tr><th>#</th><th>Nhánh</th><th>Chỉ số</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Năm</th></tr></thead>
+      <tbody><tr><td>1</td><td>Vĩ mô &amp; Tăng trưởng</td><td>GDP 2024 (giá hiện hành)</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>2</td><td>Vĩ mô &amp; Tăng trưởng</td><td>Tăng trưởng GDP 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>3</td><td>Vĩ mô &amp; Tăng trưởng</td><td>GDP/người 2025</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>4</td><td>Vĩ mô &amp; Tăng trưởng</td><td>Lạm phát CPI 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>5</td><td>Vĩ mô &amp; Tăng trưởng</td><td>Tỷ giá bình quân 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>6</td><td>Vĩ mô &amp; Tăng trưởng</td><td>Nợ công/GDP 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>7</td><td>Dân số &amp; Lao động</td><td>Dân số (2023)</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>8</td><td>Dân số &amp; Lao động</td><td>Tổng tỷ suất sinh (TFR) 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>9</td><td>Dân số &amp; Lao động</td><td>Già hóa</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>10</td><td>Dân số &amp; Lao động</td><td>Tỷ lệ đô thị hóa 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>11</td><td>Công nghiệp &amp; Chuỗi cung ứng</td><td>FDI đăng ký 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>12</td><td>Công nghiệp &amp; Chuỗi cung ứng</td><td>FDI giải ngân 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>13</td><td>Công nghiệp &amp; Chuỗi cung ứng</td><td>Tỷ trọng FDI vào chế biến, chế tạo</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>14</td><td>Công nghiệp &amp; Chuỗi cung ứng</td><td>Lũy kế FDI đến hết 2025</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>15</td><td>Chuyển đổi số &amp; AI</td><td>Quy mô kinh tế số 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>16</td><td>Chuyển đổi số &amp; AI</td><td>Mục tiêu kinh tế số</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>17</td><td>Năng lượng &amp; Chuyển đổi xanh</td><td>Công suất tái tạo 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>18</td><td>Năng lượng &amp; Chuyển đổi xanh</td><td>Điện mặt trời</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>19</td><td>Năng lượng &amp; Chuyển đổi xanh</td><td>Cam kết Net Zero</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>20</td><td>Bất động sản &amp; Đô thị</td><td>Tỷ lệ đô thị hóa 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>21</td><td>Bất động sản &amp; Đô thị</td><td>Giai đoạn thị trường</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>22</td><td>Tài chính &amp; Ngân hàng</td><td>Vốn hóa TTCK/GDP 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>23</td><td>Tài chính &amp; Ngân hàng</td><td>Nợ xấu (NPL) hệ thống</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>24</td><td>Tài chính &amp; Ngân hàng</td><td>Tín dụng/GDP</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>25</td><td>Nông nghiệp &amp; Bền vững</td><td>Trọng tâm</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>26</td><td>Nông nghiệp &amp; Bền vững</td><td>Số liệu cụ thể</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>27</td><td>Thương mại &amp; Hội nhập</td><td>Tổng kim ngạch XNK 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>28</td><td>Thương mại &amp; Hội nhập</td><td>Thặng dư TM với Mỹ 2024</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>29</td><td>Thương mại &amp; Hội nhập</td><td>Hiệp định FTA</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>30</td><td>Doanh nghiệp &amp; Khởi nghiệp</td><td>Trọng tâm</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr><tr><td>31</td><td>Doanh nghiệp &amp; Khởi nghiệp</td><td>Số liệu cụ thể</td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td><td><input type="text" placeholder="…"></td></tr></tbody>
+    </table>
+    <p class="note">⚠ Một số chỉ số là ước tính tham khảo (đánh dấu *), cần rà soát định kỳ tại data-nguon/.</p>
+  </div>
+</div>
+</body>
+</html>

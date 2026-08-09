@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Kinh tế Việt Nam 10 năm tới (2026–2036)",
+    "ky_cap_nhat": "2024–2025",
+    "nguon_chung": "GSO/TCTK, World Bank, IMF, AMRO, UNFPA, Reuters, Trade.gov, IEA/REDS, FiinGroup, TheGlobalEconomy",
+    "luu_y": "Một số chỉ số là ước tính tham khảo (đánh dấu *), cần rà soát định kỳ tại data-nguon/."
+  },
+  "headline": [
+    {"k": "GDP/người (2025)", "v": "5.066 USD", "s": "World Bank"},
+    {"k": "Tăng trưởng GDP 2024", "v": "7,09%", "s": "TCTK"},
+    {"k": "Lạm phát CPI 2024", "v": "3,63%", "s": "VietnamNet"},
+    {"k": "Nợ công/GDP 2024", "v": "33,4%", "s": "AMRO/IMF"},
+    {"k": "FDI giải ngân 2024", "v": "25,35 tỷ USD", "s": "VIR"},
+    {"k": "Tổng XNK 2024", "v": "~800 tỷ USD", "s": "VietnamPlus"},
+    {"k": "Kinh tế số/GDP 2024", "v": "~18%", "s": "GSO"},
+    {"k": "Điện tái tạo", "v": "~26% công suất", "s": "REDS"},
+    {"k": "Tỷ lệ đô thị hóa 2024", "v": "38,5%", "s": "Statista"},
+    {"k": "TFR (tỷ suất sinh) 2024", "v": "1,91", "s": "VnExpress"}
+  ],
+  "branches": [
+    {
+      "folder": "01-vi-mo-tang-truong",
+      "title": "Vĩ mô & Tăng trưởng",
+      "color": "#1F4E78",
+      "mo_ta": "Trajectory tăng trưởng GDP, năng suất, ổn định vĩ mô (lạm phát, tỷ giá, lãi suất), chính sách tài khóa – tiền tệ và rủi ro chu kỳ.",
+      "chi_so": [
+        ["GDP 2024 (giá hiện hành)", "11.511,9 nghìn tỷ VND (~470 tỷ USD)", "TCTK"],
+        ["Tăng trưởng GDP 2024", "7,09%", "VietnamNet/TCTK"],
+        ["GDP/người 2025", "5.066 USD (2023: ~4.500 USD)", "World Bank"],
+        ["Lạm phát CPI 2024", "3,63%", "VietnamNet"],
+        ["Tỷ giá bình quân 2024", "23.150 VND/USD", "AMRO"],
+        ["Nợ công/GDP 2024", "33,4% (2023: 34,5%)", "AMRO/IMF"]
+      ]
+    },
+    {
+      "folder": "02-dan-so-lao-dong",
+      "title": "Dân số & Lao động",
+      "color": "#2E7D32",
+      "mo_ta": "Cửa sổ dân số vàng đóng lại, già hóa dân số, dịch chuyển cơ cấu lao động, kỹ năng và đô thị hóa.",
+      "chi_so": [
+        ["Dân số (2023)", "~100,3 triệu", "TCTK"],
+        ["Tổng tỷ suất sinh (TFR) 2024", "1,91 (dưới mức thay thế 2,1)", "VnExpress"],
+        ["Già hóa", "Giai đoạn già hóa từ 2011; 'xã hội già' (65+≥14%) sau 2036", "UNFPA"],
+        ["Tỷ lệ đô thị hóa 2024", "38,5%", "Statista"]
+      ]
+    },
+    {
+      "folder": "03-cong-nghiep-chuoi-cung-ung",
+      "title": "Công nghiệp & Chuỗi cung ứng",
+      "color": "#E65100",
+      "mo_ta": "Vị thế Việt Nam trong làn sóng dịch chuyển chuỗi cung ứng toàn cầu (China+1), FDI chất lượng, bán dẫn – điện tử và logistics.",
+      "chi_so": [
+        ["FDI đăng ký 2024", "~38,23 tỷ USD (+4,4%)", "Lexology/VIR"],
+        ["FDI giải ngân 2024", "Kỷ lục 25,35 tỷ USD", "VIR/VNA"],
+        ["Tỷ trọng FDI vào chế biến, chế tạo", "83%", "VNA"],
+        ["Lũy kế FDI đến hết 2025", "~521 tỷ USD, ~43.000 dự án", "Mekong Capital"]
+      ]
+    },
+    {
+      "folder": "04-chuyen-doi-so-ai",
+      "title": "Chuyển đổi số & AI",
+      "color": "#6A1B9A",
+      "mo_ta": "Tác động của AI, kinh tế số, thương mại điện tử, fintech và chính phủ số tới năng suất và mô hình tăng trưởng mới.",
+      "chi_so": [
+        ["Quy mô kinh tế số 2024", "~18% GDP (~36 tỷ USD), +20% YoY", "GSO/Trade.gov"],
+        ["Mục tiêu kinh tế số", "20% GDP (2025) · 30% GDP (2030)", "Nghị quyết"]
+      ]
+    },
+    {
+      "folder": "05-nang-luong-xanh",
+      "title": "Năng lượng & Chuyển đổi xanh",
+      "color": "#00838F",
+      "mo_ta": "Lộ trình Net Zero 2050, chuyển dịch năng lượng (điện tái tạo, điện khí), giao thông xanh và tài chính khí hậu.",
+      "chi_so": [
+        ["Công suất tái tạo 2024", "~21.447 MW (~26% tổng công suất)", "REDS"],
+        ["Điện mặt trời", "~18,6 GW", "REN21"],
+        ["Cam kết Net Zero", "2050", "COP/UNFCCC"]
+      ]
+    },
+    {
+      "folder": "06-bat-dong-san-do-thi",
+      "title": "Bất động sản & Đô thị",
+      "color": "#AD1457",
+      "mo_ta": "Chu kỳ phục hồi và tái cấu trúc thị trường BĐS, nhà ở xã hội, phát triển đô thị và hạ tầng kết nối.",
+      "chi_so": [
+        ["Tỷ lệ đô thị hóa 2024", "38,5%", "Statista"],
+        ["Giai đoạn thị trường", "Phục hồi & tái cấu trúc sau điều chỉnh 2022–2025", "Nhận định"]
+      ]
+    },
+    {
+      "folder": "07-tai-chinh-ngan-hang",
+      "title": "Tài chính & Ngân hàng",
+      "color": "#283593",
+      "mo_ta": "Sức khỏe hệ thống ngân hàng, thị trường vốn, fintech và vai trò huy động vốn dài hạn.",
+      "chi_so": [
+        ["Vốn hóa TTCK/GDP 2024", "42,96% (2025: 61,4%)", "TheGlobalEconomy"],
+        ["Nợ xấu (NPL) hệ thống", "~4,5%* (xu hướng tăng nhưng chậm lại)", "FiinGroup ước"],
+        ["Tín dụng/GDP", "Mức cao ~125%* (thận trọng)", "Ước/BIS"]
+      ]
+    },
+    {
+      "folder": "08-nong-nghiep-ben-vung",
+      "title": "Nông nghiệp & Bền vững",
+      "color": "#558B2F",
+      "mo_ta": "Nông nghiệp công nghệ cao, an ninh lương thực, sinh kế nông thôn và thích ứng biến đổi khí hậu.",
+      "chi_so": [
+        ["Trọng tâm", "Nông nghiệp công nghệ cao, thích ứng BĐKH ĐBSCL", "Bộ NN&PTNT"],
+        ["Số liệu cụ thể", "Cập nhật sau (chưa tra cứu đợt này)", "—"]
+      ]
+    },
+    {
+      "folder": "09-thuong-mai-hoi-nhap",
+      "title": "Thương mại & Hội nhập",
+      "color": "#4527A0",
+      "mo_ta": "Khai thác EVFTA/CPTPP/RCEP, định hình lại quan hệ Mỹ–Trung, mở rộng thị trường mới.",
+      "chi_so": [
+        ["Tổng kim ngạch XNK 2024", "~800 tỷ USD (kỷ lục)", "VietnamPlus"],
+        ["Thặng dư TM với Mỹ 2024", "~123 tỷ USD (kỷ lục)", "Reuters"],
+        ["Hiệp định FTA", "EVFTA, CPTPP, RCEP đang khai thác", "Bộ Công Thương"]
+      ]
+    },
+    {
+      "folder": "10-doanh-nghiep-khoi-nghiep",
+      "title": "Doanh nghiệp & Khởi nghiệp",
+      "color": "#004D40",
+      "mo_ta": "Sức khỏe khu vực tư nhân, tập đoàn tư nhân lớn, SME, hệ sinh thái khởi nghiệp và đổi mới sáng tạo.",
+      "chi_so": [
+        ["Trọng tâm", "Khu vực tư nhân, startup phục hồi sau thắt chặt 2022–2024", "Bộ KH&ĐT"],
+        ["Số liệu cụ thể", "Cập nhật sau (chưa tra cứu đợt này)", "—"]
+      ]
+    }
+  ]
+}
