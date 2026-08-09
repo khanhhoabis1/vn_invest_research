@@ -1,7 +1,7 @@
 id: COMP-0003
 name: Connector Framework
 kind: library
-status: planned
+status: done
 created: '2026-08-09'
 owner_role: DE
 plane: ops

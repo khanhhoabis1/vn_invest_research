@@ -1,7 +1,7 @@
 id: COMP-0005
 name: UI Build Plane
 kind: ui
-status: planned
+status: done
 created: '2026-08-09'
 owner_role: AIE
 plane: build

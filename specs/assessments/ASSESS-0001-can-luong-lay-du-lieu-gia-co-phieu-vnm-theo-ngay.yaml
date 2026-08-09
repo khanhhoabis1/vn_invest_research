@@ -17,6 +17,9 @@ bang_chung:
 - kiem_tra: GET /sources
   ket_qua: chi co worldbank
   ngay: '2026-08-09'
+- kiem_tra: bổ sung nguồn mới.
+  ket_qua: ''
+  ngay: '2026-08-09'
 tu_brief: BRIEF-0001
 nguoi_tham_dinh: BA
 updated: '2026-08-09'

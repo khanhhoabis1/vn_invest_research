@@ -1,0 +1,15 @@
+id: BRIEF-0003
+title: Vùng giá nào nên mua vào VNM ở thời điểm hiện tại?
+status: moi
+created: '2026-08-09'
+origin:
+  raw_request: Vùng giá nào nên mua vào VNM ở thời điểm hiện tại?
+  requested_by: nha-dau-tu
+  requested_at: '2026-08-09'
+  channel: ui-ops
+loai_phan_tich: co_phieu
+doi_tuong:
+- VNM
+cau_hoi_dau_tu:
+- Định giá hiện tại đắt hay rẻ?
+updated: '2026-08-09'

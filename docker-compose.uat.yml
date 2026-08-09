@@ -1,16 +1,8 @@
-# VN Invest Research Platform — stack cuc bo, 100% open source
-# Chay: docker compose up -d          (lop loi, ~3.4GB RAM)
-#       docker compose --profile ai up -d   (them qdrant + ollama)
-#
-# Day la BASE. Moi truong dev/uat nam o docker-compose.dev.yml / .uat.yml
-# (tu dat project name de cach biet container & volume).
-
-# (khong dat name o day de tranh xung dot voi file env)
+name: vnir-uat
 
 x-common: &common
   restart: unless-stopped
   env_file: [.env]
-  networks: [vnir]
 
 services:
 
@@ -18,15 +10,15 @@ services:
   db:
     <<: *common
     image: postgres:16-alpine          # PostgreSQL License (open source)
-    container_name: vnir-db
+    container_name: vnir-uat-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-vnir}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vnir_local_dev}
       POSTGRES_DB: ${POSTGRES_DB:-vnir}
       PGDATA: /var/lib/postgresql/data/pgdata
-    ports: ["${DB_PORT:-5433}:5432"]
+    ports: ["5451:5432"]
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - vnir-uat_pgdata:/var/lib/postgresql/data
       - ./vnir/db/init:/docker-entrypoint-initdb.d:ro
     mem_limit: 512m
     healthcheck:
@@ -43,11 +35,12 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: vnir-api
+    container_name: vnir-uat-api
+    image: ${UAT_IMAGE:-vnir-api:${UAT_TAG:-v0.1.0}}
     command: >
       python -m uvicorn vnir.api.main:app
       --host 0.0.0.0 --port 8000 --workers 1
-    ports: ["${API_PORT:-8000}:8000"]
+    ports: ["8650:8000"]
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -69,7 +62,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: vnir-worker
+    container_name: vnir-uat-worker
+    image: ${UAT_IMAGE:-vnir-api:${UAT_TAG:-v0.1.0}}
     command: ["python", "-m", "vnir.worker.main"]
     volumes:
       - ./:/workspace
@@ -86,12 +80,13 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: vnir-ui-build
+    container_name: vnir-uat-ui-build
+    image: ${UAT_IMAGE_UI:-vnir-ui-build:${UAT_TAG:-v0.1.0}}
     command: >
       streamlit run vnir/ui_build/app.py
       --server.port=8601 --server.address=0.0.0.0
       --server.headless=true --browser.gatherUsageStats=false
-    ports: ["${UI_BUILD_PORT:-8601}:8601"]
+    ports: ["8651:8601"]
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -106,12 +101,13 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: vnir-ui-ops
+    container_name: vnir-uat-ui-ops
+    image: ${UAT_IMAGE_UI:-vnir-ui-build:${UAT_TAG:-v0.1.0}}
     command: >
       streamlit run vnir/ui_ops/app.py
       --server.port=8602 --server.address=0.0.0.0
       --server.headless=true --browser.gatherUsageStats=false
-    ports: ["${UI_OPS_PORT:-8602}:8602"]
+    ports: ["8652:8602"]
     volumes:
       - ./:/workspace
     working_dir: /workspace
@@ -119,30 +115,5 @@ services:
     depends_on:
       api: {condition: service_started}
 
-  # ---------------------------------------------------------------- profile "ai" (tuy chon)
-  qdrant:
-    <<: *common
-    image: qdrant/qdrant:v1.12.4       # Apache-2.0
-    container_name: vnir-qdrant
-    profiles: ["ai"]
-    ports: ["${QDRANT_PORT:-6333}:6333"]
-    volumes: [qdrant_data:/qdrant/storage]
-    mem_limit: 768m
-
-  ollama:
-    <<: *common
-    image: ollama/ollama:latest        # MIT
-    container_name: vnir-ollama
-    profiles: ["ai"]
-    ports: ["${OLLAMA_PORT:-11434}:11434"]
-    volumes: [ollama_models:/root/.ollama]
-    mem_limit: 4g
-
-networks:
-  vnir:
-    driver: bridge
-
 volumes:
-  pgdata:
-  qdrant_data:
-  ollama_models:
+  vnir-uat_pgdata:

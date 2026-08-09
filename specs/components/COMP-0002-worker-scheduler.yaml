@@ -1,7 +1,7 @@
 id: COMP-0002
 name: Worker & Scheduler
 kind: service
-status: planned
+status: done
 created: '2026-08-09'
 owner_role: DE
 plane: ops

@@ -1,6 +1,6 @@
 id: REQ-0002
 title: 'Tach giao dien thanh 2 nhom: Build plane va Ops plane'
-status: draft
+status: done
 created: '2026-08-09'
 origin:
   channel: chat

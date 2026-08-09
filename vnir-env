@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# vnir-env — chuyen doi 2 moi truong Dev / UAT tren cung 1 may.
+#
+# Cach dung:
+#   ./vnir-env dev up            # Dev: code tu develop, sua live (bind-mount)
+#   ./vnir-env dev down
+#   ./vnir-env dev logs
+#
+#   ./vnir-env uat up v0.1.0     # UAT: chay ban release da tag (on dinh)
+#   ./vnir-env uat up            # mac dinh tag v0.1.0
+#   ./vnir-env uat down
+#   ./vnir-env uat switch v0.2.0 # doi ban UAT sang tag khac (xoa container cu)
+#
+# Su khac biet:
+#   Dev  : project vnir-dev  , port 8601/8602/5433 , bind code develop
+#   UAT  : project vnir-uat  , port 8651/8652/5451 , chay image tu TAG
+#   Data : dev_pgdata / uat_pgdata — hoan toan rieng biet
+
+set -euo pipefail
+cd "$(dirname "$0")"
+
+ENV="${1:-}"; ACTION="${2:-}"; TAG="${3:-v0.1.0}"
+
+usage() {
+  echo "Dung: ./vnir-env <dev|uat> <up|down|logs|switch|ps> [tag]"
+  exit 1
+}
+[ -z "$ENV" ] || [ -z "$ACTION" ] && usage
+[[ "$ENV" == "dev" || "$ENV" == "uat" ]] || usage
+
+case "$ENV" in
+  dev)
+    CF="docker-compose.dev.yml"
+    ;;
+  uat)
+    export UAT_TAG="$TAG"
+    CF="docker-compose.uat.yml"
+    ;;
+esac
+
+case "$ACTION" in
+  up)
+    echo "► Khoi dong $ENV (compose: $CF)"
+    docker compose -f "$CF" up -d
+    ;;
+  down)
+    echo "► Tắt $ENV"
+    docker compose -f "$CF" down
+    ;;
+  switch)
+    echo "► UAT chuyen sang tag $TAG"
+    docker compose -f "$CF" down
+    docker compose -f "$CF" up -d
+    ;;
+  logs)
+    SVC="${4:-worker}"
+    docker compose -f "$CF" logs -f "${SVC}"
+    ;;
+  ps)
+    docker compose -f "$CF" ps
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+if [ "$ACTION" = "up" ] || [ "$ACTION" = "switch" ]; then
+  if [ "$ENV" = "dev" ]; then
+    echo "  Track 1 (Dev): http://localhost:8601"
+    echo "  Track 2 (Dev): http://localhost:8602"
+  else
+    echo "  Track 1 (UAT v$TAG): http://localhost:8651"
+    echo "  Track 2 (UAT v$TAG): http://localhost:8652"
+  fi
+fi

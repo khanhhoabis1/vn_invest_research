@@ -1,7 +1,7 @@
 id: COMP-0008
 name: GitHub Automation
 kind: workflow
-status: planned
+status: done
 created: '2026-08-09'
 owner_role: ARCH
 plane: build

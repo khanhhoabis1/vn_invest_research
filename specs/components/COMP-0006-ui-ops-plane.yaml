@@ -1,7 +1,7 @@
 id: COMP-0006
 name: UI Ops Plane
 kind: ui
-status: planned
+status: done
 created: '2026-08-09'
 owner_role: DE
 plane: ops

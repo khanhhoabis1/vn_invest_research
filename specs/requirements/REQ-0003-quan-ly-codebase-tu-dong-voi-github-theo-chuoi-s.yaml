@@ -1,6 +1,6 @@
 id: REQ-0003
 title: Quan ly codebase tu dong voi GitHub theo chuoi spec REQ-COMP-TASK
-status: draft
+status: done
 created: '2026-08-09'
 origin:
   channel: chat
