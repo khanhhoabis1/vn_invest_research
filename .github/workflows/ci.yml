@@ -58,13 +58,16 @@ jobs:
           cache: pip
 
       - name: Cai cong cu
-        run: pip install --quiet ruff
+        run: pip install --quiet ruff pytest pyyaml jsonschema
 
-      - name: Ruff — bat loi that su
-        run: ruff check vnir/ tools/ --output-format=github
+      - name: Ruff — bat loi that
+        run: ruff check vnir/ tools/ tests/ --output-format=github
+
+      - name: Kiem thu hoi quy
+        run: pytest tests/ -q
 
       - name: Moi file Python phai bien dich duoc
-        run: python -m compileall -q vnir tools
+        run: python -m compileall -q vnir tools tests
 
       - name: Canh bao neu package trung ten module chuan
         run: |
