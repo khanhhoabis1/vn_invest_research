@@ -8,10 +8,8 @@ Kiem 3 tang:
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from jsonschema import Draft202012Validator
-
 from spec_lib import KINDS, ROOT, SCHEMAS, load_all
 
 MAX_SMALL_MODEL_TOKENS = 6000
@@ -87,9 +85,9 @@ def validate_ai_rules() -> list[str]:
             errs.append(f"[AI] {tid} thieu verify_commands -> khong the chung minh hoan thanh")
         for f in files:
             p = f.get("path", "")
-            if f.get("action") in {"modify", "delete", "read-only"} and "*" not in p:
-                if not (ROOT / p).exists():
-                    errs.append(f"[AI] {tid} tham chieu file khong ton tai: {p} (action={f.get('action')})")
+            if (f.get("action") in {"modify", "delete", "read-only"}
+                    and "*" not in p and not (ROOT / p).exists()):
+                errs.append(f"[AI] {tid} tham chieu file khong ton tai: {p} (action={f.get('action')})")
         if t.get("status") in {"approved", "in_progress"} and len(t.get("intent", "")) < 40:
             errs.append(f"[AI] {tid} intent qua ngan/mo ho de model tu thuc thi")
     return errs

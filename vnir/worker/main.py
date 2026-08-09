@@ -42,10 +42,10 @@ def run_connector(key: str) -> None:
     log.info("Bat dau chay connector %s", key)
     try:
         info = get(key)().run()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         log.exception("Connector %s hong", key)
         info = {"source_id": key, "status": "failed", "error": str(exc),
-                "ended_at": _dt.datetime.now(_dt.timezone.utc).isoformat()}
+                "ended_at": _dt.datetime.now(_dt.UTC).isoformat()}
     record(info)
     level = log.info if info.get("status") == "success" else log.error
     level("Ket thuc %s: %s (%s dong)", key, info.get("status"), info.get("rows", 0))
@@ -67,7 +67,7 @@ def main() -> int:
             )
             log.info("Da len lich %-32s cron=%s  (rui ro phap ly: %s)",
                      c["key"], c["schedule"], c["legal_risk"])
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             log.error("Khong len lich duoc %s: %s", c["key"], exc)
 
     sched.start()
@@ -75,7 +75,7 @@ def main() -> int:
 
     stop = False
 
-    def _handle(signum, frame):  # noqa: ANN001, ARG001
+    def _handle(signum, frame):
         nonlocal stop
         log.info("Nhan tin hieu %s, dang dung...", signum)
         stop = True

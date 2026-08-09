@@ -21,10 +21,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import yaml  # noqa: E402
-
-from spec_lib import SPECS, ensure_dirs, kind_of, load, load_all, next_id, save, today  # noqa: E402
-from spec_validate import validate_all  # noqa: E402
+import yaml
+from spec_lib import SPECS, ensure_dirs, kind_of, load, load_all, next_id, save, today
+from spec_validate import validate_all
 
 OK, BAD, WARN = "\033[92m", "\033[91m", "\033[93m"
 DIM, END = "\033[2m", "\033[0m"
@@ -275,11 +274,15 @@ def main() -> int:
     n = sub.add_parser("new", help="Tao spec moi")
     n.add_argument("kind", choices=["req", "comp", "task"])
     n.add_argument("--title", required=True)
-    n.add_argument("--problem"); n.add_argument("--outcome"); n.add_argument("--question")
-    n.add_argument("--raw"); n.add_argument("--by")
+    n.add_argument("--problem")
+    n.add_argument("--outcome")
+    n.add_argument("--question")
+    n.add_argument("--raw")
+    n.add_argument("--by")
     n.add_argument("--channel", default="cli",
                    choices=["ui-build", "cli", "intake-file", "chat", "cron", "incident"])
-    n.add_argument("--impact", type=int, default=3); n.add_argument("--confidence", type=int, default=3)
+    n.add_argument("--impact", type=int, default=3)
+    n.add_argument("--confidence", type=int, default=3)
     n.add_argument("--effort", type=int, default=3)
     n.add_argument("--plane", default="both", choices=["build", "ops", "both"])
     n.add_argument("--plane-comp", default="shared", choices=["build", "ops", "shared"])
@@ -287,32 +290,46 @@ def main() -> int:
                    choices=["service", "connector", "ui", "library", "schema", "pipeline", "infra", "docs", "workflow"])
     n.add_argument("--owner", default="ARCH", choices=["PO", "BA", "ARCH", "DE", "RES", "AIE", "QA", "DOC"])
     n.add_argument("--risk", default="low", choices=["low", "medium", "high"])
-    n.add_argument("--purpose"); n.add_argument("--paths", nargs="*"); n.add_argument("--tech", nargs="*")
-    n.add_argument("--req"); n.add_argument("--comp"); n.add_argument("--intent")
-    n.add_argument("--files", nargs="*"); n.add_argument("--verify", nargs="*")
-    n.add_argument("--context", nargs="*"); n.add_argument("--acceptance", nargs="*")
+    n.add_argument("--purpose")
+    n.add_argument("--paths", nargs="*")
+    n.add_argument("--tech", nargs="*")
+    n.add_argument("--req")
+    n.add_argument("--comp")
+    n.add_argument("--intent")
+    n.add_argument("--files", nargs="*")
+    n.add_argument("--verify", nargs="*")
+    n.add_argument("--context", nargs="*")
+    n.add_argument("--acceptance", nargs="*")
     n.add_argument("--tags", nargs="*")
     n.add_argument("--budget", type=int, default=2500)
     n.add_argument("--model", default="small", choices=["small", "medium", "large"])
     n.add_argument("--minutes", type=int, default=30)
     n.set_defaults(func=cmd_new)
 
-    v = sub.add_parser("validate", help="Kiem dinh toan bo spec"); v.set_defaults(func=cmd_validate)
+    v = sub.add_parser("validate", help="Kiem dinh toan bo spec")
+    v.set_defaults(func=cmd_validate)
 
-    l = sub.add_parser("list", help="Liet ke spec")
-    l.add_argument("kind", nargs="?", choices=["req", "comp", "task"])
-    l.add_argument("--status"); l.set_defaults(func=cmd_list)
+    lst = sub.add_parser("list", help="Liet ke spec")
+    lst.add_argument("kind", nargs="?", choices=["req", "comp", "task"])
+    lst.add_argument("--status")
+    lst.set_defaults(func=cmd_list)
 
     s = sub.add_parser("show", help="In goi thuc thi cho AI")
-    s.add_argument("id"); s.add_argument("--raw", action="store_true"); s.set_defaults(func=cmd_show)
+    s.add_argument("id")
+    s.add_argument("--raw", action="store_true")
+    s.set_defaults(func=cmd_show)
 
     st = sub.add_parser("set", help="Gan gia tri: specctl set TASK-0001 status=done")
-    st.add_argument("id"); st.add_argument("pairs", nargs="+"); st.set_defaults(func=cmd_set)
+    st.add_argument("id")
+    st.add_argument("pairs", nargs="+")
+    st.set_defaults(func=cmd_set)
 
-    i = sub.add_parser("index", help="Sinh specs/SPEC-INDEX.md"); i.set_defaults(func=cmd_index)
+    i = sub.add_parser("index", help="Sinh specs/SPEC-INDEX.md")
+    i.set_defaults(func=cmd_index)
 
     nx = sub.add_parser("next", help="Goi y task ke tiep")
-    nx.add_argument("--model", choices=["small", "medium", "large"]); nx.set_defaults(func=cmd_next)
+    nx.add_argument("--model", choices=["small", "medium", "large"])
+    nx.set_defaults(func=cmd_next)
 
     args = ap.parse_args()
     return args.func(args)

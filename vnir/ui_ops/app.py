@@ -25,7 +25,7 @@ def api_get(path: str, **params):
         r = httpx.get(f"{API}{path}", params=params, timeout=30)
         r.raise_for_status()
         return r.json()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         st.error(f"Khong goi duoc API {path}: {exc}")
         return None
 
@@ -35,7 +35,7 @@ def api_post(path: str, payload: dict, timeout: int = 300):
         r = httpx.post(f"{API}{path}", json=payload, timeout=timeout)
         r.raise_for_status()
         return r.json()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         st.error(f"Loi goi API {path}: {exc}")
         return None
 

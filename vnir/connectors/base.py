@@ -102,10 +102,10 @@ class BaseConnector:
                     content=resp.content,
                     url=str(resp.url),
                     http_status=resp.status_code,
-                    fetched_at=_dt.datetime.now(_dt.timezone.utc).isoformat(),
+                    fetched_at=_dt.datetime.now(_dt.UTC).isoformat(),
                     content_type=resp.headers.get("content-type", ""),
                 )
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 last_exc = exc
                 wait = 2 ** attempt
                 self.log.warning("Lan %d/%d that bai (%s), doi %ds", attempt, self.max_retries, exc, wait)
@@ -141,7 +141,7 @@ class BaseConnector:
             "source_id": self.source_id, "dataset": self.dataset, "title": self.title,
             "homepage": self.homepage, "legal_risk": self.legal_risk,
             "connector": type(self).__name__,
-            "fetched_at": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+            "fetched_at": _dt.datetime.now(_dt.UTC).isoformat(),
             "rows": rows, "files": files,
         }
         (d / "_manifest.json").write_text(
@@ -158,7 +158,7 @@ class BaseConnector:
         df = pd.DataFrame(records)
         df["_source_id"] = self.source_id
         df["_dataset"] = self.dataset
-        df["_ingested_at"] = _dt.datetime.now(_dt.timezone.utc).isoformat()
+        df["_ingested_at"] = _dt.datetime.now(_dt.UTC).isoformat()
         out = SILVER / domain / f"{self.source_id}__{self.dataset}.parquet"
         if self.dry_run:
             self.log.info("[dry-run] se ghi %d dong vao %s", len(df), out)
@@ -177,7 +177,7 @@ class BaseConnector:
 
     # ------------------------------------------------------------ run
     def run(self) -> dict:
-        started = _dt.datetime.now(_dt.timezone.utc)
+        started = _dt.datetime.now(_dt.UTC)
         info: dict[str, Any] = {
             "source_id": self.source_id, "dataset": self.dataset,
             "started_at": started.isoformat(), "status": "running",
@@ -191,11 +191,11 @@ class BaseConnector:
             info.update(status="success", rows=len(records),
                         urls=[r.url for r in results],
                         http_status=[r.http_status for r in results])
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             self.log.exception("Connector that bai")
             info.update(status="failed", error=f"{type(exc).__name__}: {exc}")
         finally:
-            ended = _dt.datetime.now(_dt.timezone.utc)
+            ended = _dt.datetime.now(_dt.UTC)
             info["ended_at"] = ended.isoformat()
             info["duration_seconds"] = round((ended - started).total_seconds(), 2)
         return info

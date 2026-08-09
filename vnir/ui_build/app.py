@@ -23,7 +23,7 @@ def api_get(path: str, **params):
         r = httpx.get(f"{API}{path}", params=params, timeout=20)
         r.raise_for_status()
         return r.json()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         st.error(f"Khong goi duoc API {path}: {exc}")
         return None
 
@@ -33,7 +33,7 @@ def api_post(path: str, payload: dict):
         r = httpx.post(f"{API}{path}", json=payload, timeout=60)
         r.raise_for_status()
         return r.json()
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         st.error(f"Khong goi duoc API {path}: {exc}")
         return None
 
@@ -98,10 +98,13 @@ with tabs[1]:
         if detail:
             cA, cB = st.columns(2)
             with cA:
-                st.markdown("**Van de**"); st.write(detail.get("problem", "—"))
-                st.markdown("**Cau hoi dau tu**"); st.write(detail.get("investment_question", "—"))
+                st.markdown("**Van de**")
+                st.write(detail.get("problem", "—"))
+                st.markdown("**Cau hoi dau tu**")
+                st.write(detail.get("investment_question", "—"))
             with cB:
-                st.markdown("**Ket qua mong doi**"); st.write(detail.get("outcome", "—"))
+                st.markdown("**Ket qua mong doi**")
+                st.write(detail.get("outcome", "—"))
                 st.markdown("**Tieu chi nghiem thu**")
                 for a in detail.get("acceptance", []):
                     st.write(f"- {a}")
@@ -138,7 +141,8 @@ with tabs[3]:
         pick = st.selectbox("Xem goi thuc thi", [t["id"] for t in tasks])
         d = api_get(f"/specs/item/{pick}")
         if d:
-            st.markdown("**Viec phai lam**"); st.write(d.get("intent"))
+            st.markdown("**Viec phai lam**")
+            st.write(d.get("intent"))
             st.markdown("**File duoc phep sua**")
             for f in d.get("files_to_touch", []):
                 st.write(f"- `{f['path']}` — **{f['action']}** {f.get('hint','')}")

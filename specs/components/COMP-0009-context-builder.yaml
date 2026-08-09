@@ -16,3 +16,6 @@ requirements:
 - REQ-0006
 risk: medium
 updated: '2026-08-09'
+github:
+  issue: 11
+  url: https://github.com/khanhhoabis1/vn_invest_research/issues/11

@@ -8,7 +8,6 @@ from __future__ import annotations
 import datetime as _dt
 import json
 import os
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -44,7 +43,7 @@ def health() -> dict:
     """Kiem tra suc khoe — dung boi docker healthcheck."""
     return {
         "status": "ok",
-        "time": _dt.datetime.now(_dt.timezone.utc).isoformat(),
+        "time": _dt.datetime.now(_dt.UTC).isoformat(),
         "root": str(ROOT),
         "specs_dir_exists": (ROOT / "specs").exists(),
         "data_dir_exists": (ROOT / "data").exists(),
@@ -211,7 +210,7 @@ def run_query(body: QueryIn) -> dict:
         df = con.execute(f"SELECT * FROM ({sql}) LIMIT {int(body.limit)}").fetchdf()
         return {"ok": True, "rows": len(df), "columns": list(df.columns),
                 "data": json.loads(df.to_json(orient="records", date_format="iso"))}
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         raise HTTPException(400, f"Loi SQL: {exc}") from exc
     finally:
         con.close()

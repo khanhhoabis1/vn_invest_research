@@ -20,7 +20,7 @@ def discover() -> dict[str, type[BaseConnector]]:
             continue
         try:
             m = importlib.import_module(f"vnir.connectors.{mod.name}")
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             # Khong nuot loi im lang (P8: that bai phai on ao)
             import logging
             logging.getLogger("connector.registry").error(
