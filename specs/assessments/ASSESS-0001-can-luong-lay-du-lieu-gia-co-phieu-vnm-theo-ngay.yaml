@@ -1,0 +1,32 @@
+id: ASSESS-0001
+title: 'Can luong lay du lieu: Gia co phieu VNM theo ngay'
+status: xong
+created: '2026-08-09'
+origin:
+  raw_request: '[Day tu BRIEF-0001] De bai phan tich "Phan tich co phieu VNM, co nen mua o vung gia hien
+    tai khong" can du lieu: Gia co phieu VNM theo ngay. Yeu cau goc: Phan tich co phieu VNM, co nen mua
+    o vung gia hien tai khong'
+  requested_by: PO
+  requested_at: '2026-08-09'
+  channel: khac
+ket_luan: chua_dap_ung
+bang_chung:
+- kiem_tra: GET http://localhost:8000/sources
+  ket_qua: 'chi co: worldbank.vn_macro_indicators'
+  ngay: '2026-08-09'
+- kiem_tra: GET /sources
+  ket_qua: chi co worldbank
+  ngay: '2026-08-09'
+tu_brief: BRIEF-0001
+nguoi_tham_dinh: BA
+updated: '2026-08-09'
+phan_thieu:
+- connector gia co phieu (KBS hoac Vietcap)
+uu_tien:
+  tac_dong: 5
+  tu_tin: 4
+  cong_suc: 3
+  diem: 6.67
+sinh_ra_req:
+- REQ-0007
+- REQ-0007

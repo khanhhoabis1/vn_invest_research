@@ -1,7 +1,7 @@
 # CHI MUC SPEC — ban do 1 trang cho nguoi va AI
 
 > Sinh tu dong boi `python tools/specctl.py index`. **Khong sua tay.**
-> Cap nhat: 2026-08-09  |  REQ=6  COMP=11  TASK=0
+> Cap nhat: 2026-08-09  |  REQ=7  COMP=11  TASK=0
 
 Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dung.
 
@@ -15,6 +15,7 @@ Doc file nay truoc khi lam bat cu viec gi. Moi ID la vinh vien, khong tai su dun
 | `REQ-0004` | Model AI nho truy xuat duoc yeu cau cu de phat trien tiep | draft | 6.67 | build | - |
 | `REQ-0005` | Thu thap tu dong du lieu kinh te vi mo va thi truong CK/BDS Viet Nam | draft | 4.0 | ops | - |
 | `REQ-0006` | Co che ghi nhan tai lieu va chuyen doi sang dang LLM su dung hieu qua | draft | 5.33 | both | - |
+| `REQ-0007` | Can luong lay du lieu: Gia co phieu VNM theo ngay | draft | 6.67 | ops | - |
 
 ## Thanh phan (COMP) — sua o dau
 

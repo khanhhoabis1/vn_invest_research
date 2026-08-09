@@ -40,23 +40,94 @@ def api_post(path: str, payload: dict, timeout: int = 300):
         return None
 
 
-st.title("📊 Ops Plane — Trung tam van hanh du lieu")
-st.caption("Nhom B · Thu thap, kiem tra va kham pha du lieu kinh te Viet Nam. "
-           "Gui yeu cau nang cap nen tang tai **Build Plane :8601**.")
+st.title("📊 TRACK 2 — Thu thập & Phân tích đầu tư")
+st.caption("Nơi bạn giao đề bài phân tích (cổ phiếu, ngành, vĩ mô). Đội đầu tư sẽ "
+           "kiểm kê dữ liệu, cập nhật/lấy mới qua nền tảng, rồi báo cáo có trích dẫn nguồn. "
+           "Thiếu luồng dữ liệu thì tự động đẩy sang **Track 1 :8601**.")
 
 health = api_get("/health")
 if not health:
     st.stop()
 
-tabs = st.tabs(["🔌 Nguon du lieu", "▶️ Chay & lich su", "🗃 Bo du lieu",
-                "📈 Kham pha", "🔎 Truy van SQL"])
+tabs = st.tabs(["🎯 Đề bài phân tích", "📋 Danh sách (BRIEF)", "🔌 Nguồn dữ liệu",
+                "▶️ Chạy & lịch sử", "🗃 Bộ dữ liệu", "📈 Khám phá", "🔎 Truy vấn SQL"])
 
-# ---------------------------------------------------------------- nguon
+# ---------------------------------------------------------------- tab 0: de bai
 with tabs[0]:
-    st.subheader("Cac nguon da dang ky")
+    st.subheader("🎯 Giao đề bài phân tích")
+    st.info("Viết đề bài bằng tiếng Việt. Đội đầu tư sẽ kiểm kê dữ liệu — "
+            "nếu thiếu luồng lấy, họ đẩy sang Track 1 thay vì tự bịa số.")
+    with st.form("brief"):
+        text = st.text_area("Đề bài của bạn", height=140,
+                            placeholder="Phân tích cổ phiếu VNM: có nên mua ở vùng giá hiện tại?")
+        loai = st.selectbox("Loại phân tích", ["co_phieu", "nganh", "vi_mo",
+                                               "bat_dong_san", "danh_muc", "so_sanh", "khac"])
+        doi_tuong = st.text_input("Đối tượng (mã CK, tên ngành...)", "VNM")
+        cau_hoi = st.text_input("Câu hỏi đầu tư chính", "Định giá hiện tại đắt hay rẻ?")
+        if st.form_submit_button("Giao đề bài", type="primary"):
+            if len(text.strip()) < 10:
+                st.warning("Đề bài quá ngắn.")
+            else:
+                res = api_post("/intake", {"text": text, "requested_by": "nha-dau-tu",
+                                           "channel": "ui-ops",
+                                           "kind": "brief", "loai": loai,
+                                           "doi_tuong": [x.strip() for x in doi_tuong.split(",") if x.strip()],
+                                           "cau_hoi": [cau_hoi]})
+                if res and res.get("ok"):
+                    st.success(f"Đã ghi nhận {res.get('brief_id')}. "
+                               f"Mở tab '📋 Danh sách (BRIEF)' để theo dõi.")
+
+# ---------------------------------------------------------------- tab 1: danh sach BRIEF
+with tabs[1]:
+    st.subheader("📋 Đề bài đang xử lý (Track 2)")
+    briefs = api_get("/specs/brief") or []
+    if not briefs:
+        st.info("Chưa có đề bài nào. Tạo ở tab '🎯 Giao đề bài phân tích'.")
+    else:
+        mau = {"moi": "⚪", "kiem_ke_du_lieu": "🔍", "cho_track_1": "⚠️",
+               "dang_thu_thap": "⬇️", "dang_phan_tich": "🧮", "xong": "✅", "huy": "🗑️"}
+        st.dataframe(
+            [{"ID": b["id"], "Đề bài": b["title"], "Trạng thái": mau.get(b.get("status"), "⚪"),
+               "Loại": b.get("loai_phan_tich"), "Đối tượng": ", ".join(b.get("doi_tuong", [])),
+               "Đang chờ T1": len(b.get("cho_req", []))}
+             for b in briefs], use_container_width=True, hide_index=True)
+        pick = st.selectbox("Xem chi tiết", [b["id"] for b in briefs], key="bbsel")
+        d = api_get(f"/specs/item/{pick}")
+        if d:
+            st.markdown("**📝 Đề bài gốc**")
+            st.code((d.get("origin") or {}).get("raw_request", "—"), language=None)
+            if d.get("cau_hoi_dau_tu"):
+                st.markdown("**❓ Câu hỏi đầu tư**")
+                for q in d["cau_hoi_dau_tu"]:
+                    st.write(f"- {q}")
+            ke = d.get("kiem_ke", [])
+            if ke:
+                st.markdown("**🧾 Kiểm kê dữ liệu**")
+                c = {"co_du": "✅", "co_nhung_cu": "⚠️", "chua_co_luong": "❌"}
+                for k in ke:
+                    st.write(f"- {c.get(k['trang_thai'], '')} {k['du_lieu_can']} "
+                             f"→ {k.get('hanh_dong', '')}")
+            if d.get("sinh_ra_assess"):
+                st.warning("⚠️ Thiếu luồng dữ liệu — đã đẩy sang Track 1: "
+                           + ", ".join(d["sinh_ra_assess"]))
+            bc = d.get("bao_cao")
+            if bc:
+                st.markdown("**📑 Báo cáo**")
+                if bc.get("luan_diem"):
+                    st.success(f"**Luận điểm:** {bc['luan_diem']}")
+                if bc.get("so_nguon_trich_dan"):
+                    st.write(f"Nguồn trích dẫn: {bc['so_nguon_trich_dan']}")
+                if bc.get("rui_ro"):
+                    st.write("**Rủi ro:** " + "; ".join(bc["rui_ro"]))
+                if bc.get("dieu_chua_biet"):
+                    st.write("**Chưa biết:** " + "; ".join(bc["dieu_chua_biet"]))
+
+# ---------------------------------------------------------------- tab 2: nguon
+with tabs[2]:
+    st.subheader("Các nguồn đã đăng ký")
     sources = api_get("/sources") or []
     if not sources:
-        st.warning("Chua co connector nao. Them vao `vnir/connectors/`.")
+        st.warning("Chưa có connector nào. Thêm vào `vnir/connectors/`.")
     else:
         risk_colour = {"low": "🟢", "medium": "🟡", "high": "🔴"}
         st.dataframe(
@@ -73,15 +144,15 @@ with tabs[0]:
                 st.write(f"Trang chu: {s['homepage']}")
                 st.caption(f"Lop: `{s['class']}`")
 
-# ---------------------------------------------------------------- chay
-with tabs[1]:
-    st.subheader("Chay thu thap thu cong")
+# ---------------------------------------------------------------- tab 3: chay & lich su
+with tabs[3]:
+    st.subheader("Chạy thu thập thủ công")
     sources = api_get("/sources") or []
     if sources:
         col1, col2, col3 = st.columns([3, 1, 1])
-        key = col1.selectbox("Chon nguon", [s["key"] for s in sources])
-        dry = col2.checkbox("Chay thu (dry-run)", value=False)
-        if col3.button("Chay ngay", type="primary"):
+        key = col1.selectbox("Chọn nguồn", [s["key"] for s in sources])
+        dry = col2.checkbox("Chạy thử (dry-run)", value=False)
+        if col3.button("Chạy ngay", type="primary"):
             with st.spinner(f"Dang thu thap {key}..."):
                 res = api_post("/runs", {"key": key, "dry_run": dry})
             if res:
@@ -108,8 +179,8 @@ with tabs[1]:
     else:
         st.caption("Chua co lan chay nao.")
 
-# ---------------------------------------------------------------- bo du lieu
-with tabs[2]:
+# ---------------------------------------------------------------- tab 4: bo du lieu
+with tabs[4]:
     st.subheader("Bo du lieu da chuan hoa")
     ds = api_get("/datasets") or []
     if ds:
@@ -122,8 +193,8 @@ with tabs[2]:
     bronze = ROOT / "data" / "bronze"
     if bronze.exists():
         rows = []
+        import json as _json
         for man in sorted(bronze.rglob("_manifest.json"))[-30:]:
-            import json as _json
             m = _json.loads(man.read_text(encoding="utf-8"))
             rows.append({"Nguon": m.get("source_id"), "Bo": m.get("dataset"),
                          "Tai luc": m.get("fetched_at", "")[:19],
@@ -136,8 +207,8 @@ with tabs[2]:
     else:
         st.caption("Chua co thu muc bronze.")
 
-# ---------------------------------------------------------------- kham pha
-with tabs[3]:
+# ---------------------------------------------------------------- tab 5: kham pha
+with tabs[5]:
     st.subheader("Kham pha & bieu dien du lieu")
     ds = api_get("/datasets") or []
     if not ds:
@@ -172,8 +243,8 @@ with tabs[3]:
             with st.expander("Xem bang du lieu"):
                 st.dataframe(df.head(500), use_container_width=True)
 
-# ---------------------------------------------------------------- SQL
-with tabs[4]:
+# ---------------------------------------------------------------- tab 6: SQL
+with tabs[6]:
     st.subheader("Truy van SQL (DuckDB, chi doc)")
     st.caption("Doc truc tiep file Parquet. Vi du: "
                "`SELECT * FROM 'data/silver/macro/worldbank__vn_macro_indicators.parquet' LIMIT 20`")
@@ -187,3 +258,12 @@ with tabs[4]:
         if res and res.get("ok"):
             st.success(f"{res['rows']} dong")
             st.dataframe(pd.DataFrame(res["data"]), use_container_width=True)
+
+st.caption("Nơi bạn giao đề bài phân tích (cổ phiếu, ngành, vĩ mô). Đội đầu tư sẽ "
+           "kiểm kê dữ liệu, cập nhật/lấy mới qua nền tảng, rồi báo cáo có trích dẫn nguồn. "
+           "Thiếu luồng dữ liệu thì tự động đẩy sang **Track 1 :8601**.")
+
+health = api_get("/health")
+if not health:
+    st.stop()
+

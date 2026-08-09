@@ -1,0 +1,13 @@
+id: ASSESS-0003
+title: Toi muon xem bien dong ty gia VND/USD theo thoi gian thuc
+status: moi
+created: '2026-08-09'
+origin:
+  raw_request: Toi muon xem bien dong ty gia VND/USD theo thoi gian thuc
+  requested_by: PO
+  requested_at: '2026-08-09'
+  channel: chat
+ket_luan: chua_tham_dinh
+bang_chung: []
+nguoi_tham_dinh: BA
+updated: '2026-08-09'

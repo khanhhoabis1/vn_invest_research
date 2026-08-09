@@ -1,0 +1,29 @@
+id: BRIEF-0001
+title: Phan tich co phieu VNM, co nen mua o vung gia hien tai khong
+status: cho_track_1
+created: '2026-08-09'
+origin:
+  raw_request: Phan tich co phieu VNM, co nen mua o vung gia hien tai khong
+  requested_by: PO
+  requested_at: '2026-08-09'
+loai_phan_tich: co_phieu
+doi_tuong:
+- VNM
+cau_hoi_dau_tu:
+- Dinh gia hien tai dat hay re?
+- Bien loi nhuan co cai thien khong?
+updated: '2026-08-09'
+kiem_ke:
+- du_lieu_can: GDP va lam phat vi mo
+  trang_thai: co_du
+  nguon: worldbank.vn_macro_indicators
+  cap_nhat_lan_cuoi: '2026-08-09'
+  hanh_dong: dung luon
+- du_lieu_can: Gia co phieu VNM theo ngay
+  trang_thai: chua_co_luong
+  hanh_dong: chua co connector CK
+- du_lieu_can: Bao cao tai chinh VNM
+  trang_thai: chua_co_luong
+  hanh_dong: chua co connector BCTC
+sinh_ra_assess:
+- ASSESS-0001

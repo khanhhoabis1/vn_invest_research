@@ -65,9 +65,10 @@ def _load_specs(kind: str) -> list[dict]:
 
 @app.get("/specs/{kind}", tags=["build-plane"])
 def list_specs(kind: str, status: str | None = None) -> list[dict]:
-    """Liet ke REQ / COMP / TASK."""
-    if kind.upper() not in {"REQ", "COMP", "TASK"}:
-        raise HTTPException(400, "kind phai la req, comp hoac task")
+    """Liet ke REQ / COMP / TASK / ASSESS / BRIEF."""
+    kind = kind.upper()
+    if kind not in {"REQ", "COMP", "TASK", "ASSESS", "BRIEF"}:
+        raise HTTPException(400, "kind khong hop le")
     items = _load_specs(kind)
     if status:
         items = [s for s in items if s.get("status") == status]
@@ -84,6 +85,35 @@ def get_spec(spec_id: str) -> dict:
         raise HTTPException(404, str(exc)) from exc
 
 
+class ConcludeIn(BaseModel):
+    ket_luan: str
+    bang_chung: list[str] | None = None
+
+
+@app.post("/specs/assess/{spec_id}/conclude", tags=["build-plane"])
+def conclude_assess(spec_id: str, body: ConcludeIn) -> dict:
+    """Ghi nhan ket luan tham dinh. BAT BUOC co bang chung neu chua dap ung/dap ung mot phan."""
+    from spec_lib import load, save
+    try:
+        s = load(spec_id)
+    except FileNotFoundError as exc:
+        raise HTTPException(404, str(exc)) from exc
+    if s.get("ket_luan") not in ("chua_tham_dinh", None):
+        pass  # cho phep ghi de (vi du sua ket luan)
+    if body.ket_luan in ("chua_dap_ung", "dap_ung_mot_phan") and not s.get("bang_chung") and not body.bang_chung:
+        raise HTTPException(400, "Thieu bang chung that — khong duoc phong doan")
+    s["ket_luan"] = body.ket_luan
+    s["status"] = "xong"
+    if body.bang_chung:
+        s.setdefault("bang_chung", []).append({
+            "kiem_tra": body.bang_chung[0],
+            "ket_qua": body.bang_chung[1] if len(body.bang_chung) > 1 else "",
+            "ngay": _dt.date.today().isoformat(),
+        })
+    save(s)
+    return {"ok": True, "id": spec_id, "ket_luan": body.ket_luan}
+
+
 @app.get("/specs/validate", tags=["build-plane"])
 def validate_specs() -> dict:
     """Kiem dinh toan bo spec (3 tang: schema, lien ket, luat AI)."""
@@ -96,11 +126,29 @@ class IntakeIn(BaseModel):
     text: str = Field(..., min_length=10, description="Yeu cau bang tieng Viet, van xuoi")
     requested_by: str = "nha-dau-tu"
     channel: str = "ui-build"
+    kind: str | None = None          # "brief" neu la de bai phan tich (Track 2)
+    loai: str | None = None
+    doi_tuong: list[str] | None = None
+    cau_hoi: list[str] | None = None
 
 
 @app.post("/intake", tags=["build-plane"])
 def create_intake(body: IntakeIn) -> dict:
-    """Nhan yeu cau tho -> luu vao intake/inbox de PO phan ra thanh REQ."""
+    """Nhan yeu cau tho. Neu kind=brief thi tao luon BRIEF (Track 2),
+    nguoc lai luu vao intake/inbox de PO phan ra thanh REQ (Track 1)."""
+    from spec_lib import next_id, save, today
+    if body.kind == "brief":
+        bid = next_id("BRIEF")
+        spec = {
+            "id": bid, "title": body.text[:70], "status": "moi", "created": today(),
+            "origin": {"raw_request": body.text, "requested_by": body.requested_by,
+                       "requested_at": today(), "channel": body.channel},
+            "loai_phan_tich": body.loai or "khac",
+            "doi_tuong": body.doi_tuong or [],
+            "cau_hoi_dau_tu": body.cau_hoi or [],
+        }
+        save(spec)
+        return {"ok": True, "brief_id": bid, "next": "Doi dau tu kiem ke du lieu"}
     ts = _dt.datetime.now().strftime("%Y%m%d-%H%M%S")
     d = ROOT / "intake" / "inbox"
     d.mkdir(parents=True, exist_ok=True)

@@ -62,7 +62,8 @@
             "intake-file",
             "chat",
             "cron",
-            "incident"
+            "incident",
+            "track-cli"
           ]
         },
         "raw_request": {
@@ -74,6 +75,9 @@
           "type": "string"
         },
         "source_file": {
+          "type": "string"
+        },
+        "requested_at": {
           "type": "string"
         }
       }
@@ -182,6 +186,19 @@
     },
     "notes": {
       "type": "string"
+    },
+    "tu_assess": {
+      "type": "string",
+      "pattern": "^ASSESS-[0-9]{4}$",
+      "description": "Tham dinh sinh ra REQ nay (Track 1 buoc 2)"
+    },
+    "cho_brief": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^BRIEF-[0-9]{4}$"
+      },
+      "description": "Cac BRIEF Track 2 dang cho REQ nay xong"
     }
   }
 }

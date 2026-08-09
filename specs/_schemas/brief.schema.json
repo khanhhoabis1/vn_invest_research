@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BRIEF — De bai phan tich dau tu (Track 2)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "origin",
+    "loai_phan_tich"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^BRIEF-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "moi",
+        "kiem_ke_du_lieu",
+        "cho_track_1",
+        "dang_thu_thap",
+        "dang_phan_tich",
+        "xong",
+        "huy"
+      ]
+    },
+    "created": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_request"
+      ],
+      "properties": {
+        "raw_request": {
+          "type": "string",
+          "minLength": 10
+        },
+        "requested_by": {
+          "type": "string"
+        },
+        "requested_at": {
+          "type": "string"
+        },
+        "han_chot": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        }
+      }
+    },
+    "loai_phan_tich": {
+      "type": "string",
+      "enum": [
+        "co_phieu",
+        "nganh",
+        "vi_mo",
+        "bat_dong_san",
+        "danh_muc",
+        "so_sanh",
+        "khac"
+      ]
+    },
+    "doi_tuong": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ma CK, ten nganh, hoac chu de cu the"
+    },
+    "cau_hoi_dau_tu": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Cau hoi cu the can tra loi de ra quyet dinh"
+    },
+    "kiem_ke": {
+      "type": "array",
+      "description": "Bang doi chieu du lieu CAN vs CO",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "du_lieu_can",
+          "trang_thai"
+        ],
+        "properties": {
+          "du_lieu_can": {
+            "type": "string"
+          },
+          "trang_thai": {
+            "type": "string",
+            "enum": [
+              "co_du",
+              "co_nhung_cu",
+              "chua_co_luong"
+            ]
+          },
+          "nguon": {
+            "type": "string"
+          },
+          "cap_nhat_lan_cuoi": {
+            "type": "string"
+          },
+          "hanh_dong": {
+            "type": "string"
+          },
+          "req_lien_quan": {
+            "type": "string",
+            "pattern": "^REQ-[0-9]{4}$"
+          }
+        }
+      }
+    },
+    "cho_req": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^REQ-[0-9]{4}$"
+      },
+      "description": "Cac REQ Track 1 ma BRIEF nay dang cho"
+    },
+    "sinh_ra_assess": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ASSESS-[0-9]{4}$"
+      }
+    },
+    "bao_cao": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "duong_dan": {
+          "type": "string"
+        },
+        "luan_diem": {
+          "type": "string"
+        },
+        "so_nguon_trich_dan": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rui_ro": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dieu_chua_biet": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issue": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ASSESS — Tham dinh yeu cau (Track 1, buoc 2)",
+  "description": "Doi phan tich dau tu tham dinh: phien ban hien tai da dap ung yeu cau chua.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "origin",
+    "ket_luan",
+    "bang_chung"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ASSESS-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "moi",
+        "dang_tham_dinh",
+        "xong"
+      ]
+    },
+    "created": {
+      "type": "string"
+    },
+    "updated": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_request"
+      ],
+      "properties": {
+        "raw_request": {
+          "type": "string",
+          "minLength": 10,
+          "description": "NGUYEN VAN yeu cau cua nguoi dung. Khong duoc dien giai lai."
+        },
+        "requested_by": {
+          "type": "string"
+        },
+        "requested_at": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string",
+          "enum": [
+            "chat",
+            "github",
+            "ui_build",
+            "email",
+            "khac"
+          ]
+        }
+      }
+    },
+    "ket_luan": {
+      "type": "string",
+      "enum": [
+        "chua_tham_dinh",
+        "da_dap_ung",
+        "dap_ung_mot_phan",
+        "chua_dap_ung",
+        "khong_kha_thi"
+      ],
+      "description": "Ket luan tham dinh. 'chua_tham_dinh' khi moi tao."
+    },
+    "bang_chung": {
+      "type": "array",
+      "minItems": 0,
+      "description": "BAT BUOC khi ket_luan != chua_tham_dinh. Lenh da chay + output that.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kiem_tra",
+          "ket_qua"
+        ],
+        "properties": {
+          "kiem_tra": {
+            "type": "string",
+            "description": "Lenh hoac endpoint da chay"
+          },
+          "ket_qua": {
+            "type": "string",
+            "description": "Output THAT, khong duoc bia"
+          },
+          "ngay": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "phan_thieu": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Liet ke chinh xac cai gi con thieu"
+    },
+    "nguon_du_lieu": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ten": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "trang_thai": {
+            "type": "string",
+            "enum": [
+              "da_kiem_chung",
+              "bi_chan",
+              "khong_ton_tai",
+              "chua_kiem_tra"
+            ]
+          },
+          "http_status": {
+            "type": "integer"
+          },
+          "phap_ly": {
+            "type": "string",
+            "enum": [
+              "cong_khai",
+              "can_dang_ky",
+              "cam_scrape",
+              "chua_ro"
+            ]
+          }
+        }
+      }
+    },
+    "huong_dan_su_dung": {
+      "type": "string",
+      "description": "Khi da_dap_ung: huong dan nguoi dung dung tinh nang co san"
+    },
+    "phuong_an_thay_the": {
+      "type": "string",
+      "description": "Khi khong_kha_thi: de xuat cach khac"
+    },
+    "uu_tien": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tac_dong": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "tu_tin": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "cong_suc": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "diem": {
+          "type": "number"
+        }
+      }
+    },
+    "nguoi_tham_dinh": {
+      "type": "string",
+      "enum": [
+        "BA",
+        "RES",
+        "ARCH",
+        "PO",
+        "QA",
+        "AIE",
+        "DE",
+        "DOC"
+      ]
+    },
+    "sinh_ra_req": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^REQ-[0-9]{4}$"
+      },
+      "description": "REQ duoc sinh ra tu tham dinh nay"
+    },
+    "tu_brief": {
+      "type": "string",
+      "pattern": "^BRIEF-[0-9]{4}$",
+      "description": "Neu yeu cau nay day nguoc tu Track 2"
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issue": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

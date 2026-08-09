@@ -272,7 +272,7 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     n = sub.add_parser("new", help="Tao spec moi")
-    n.add_argument("kind", choices=["req", "comp", "task"])
+    n.add_argument("kind", choices=["req", "comp", "task", "assess", "brief"])
     n.add_argument("--title", required=True)
     n.add_argument("--problem")
     n.add_argument("--outcome")
@@ -310,7 +310,7 @@ def main() -> int:
     v.set_defaults(func=cmd_validate)
 
     lst = sub.add_parser("list", help="Liet ke spec")
-    lst.add_argument("kind", nargs="?", choices=["req", "comp", "task"])
+    lst.add_argument("kind", nargs="?", choices=["req", "comp", "task", "assess", "brief"])
     lst.add_argument("--status")
     lst.set_defaults(func=cmd_list)
 

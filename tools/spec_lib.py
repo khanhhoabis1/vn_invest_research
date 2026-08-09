@@ -19,12 +19,16 @@ SPECS = ROOT / "specs"
 SCHEMAS = SPECS / "_schemas"
 
 KINDS = {
+    # Track 1 — phat trien nen tang
+    "ASSESS": {"dir": SPECS / "assessments", "schema": "assess.schema.json"},
     "REQ": {"dir": SPECS / "requirements", "schema": "requirement.schema.json"},
     "COMP": {"dir": SPECS / "components", "schema": "component.schema.json"},
     "TASK": {"dir": SPECS / "tasks", "schema": "task.schema.json"},
+    # Track 2 — thu thap du lieu & phan tich dau tu
+    "BRIEF": {"dir": SPECS / "briefs", "schema": "brief.schema.json"},
 }
 
-ID_RE = re.compile(r"^(REQ|COMP|TASK)-(\d{4})$")
+ID_RE = re.compile(r"^(ASSESS|REQ|COMP|TASK|BRIEF)-(\d{4})$")
 
 
 def today() -> str:

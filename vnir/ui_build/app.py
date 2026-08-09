@@ -1,7 +1,10 @@
-"""UI NHOM A — BUILD PLANE: Xuong nang cap nen tang.
+"""UI NHOM A — BUILD PLANE / TRACK 1: Phát triển nền tảng.
 
 Nguoi dung: nguoi dua yeu cau cai thien/nang cap, PO, kien truc su, AI agent.
 Chay: streamlit run vnir/ui_build/app.py --server.port=8601
+
+Luong Track 1:
+  Ban neu yeu cau -> ASSESS (doi phan tich tham dinh) -> REQ -> COMP -> TASK -> release
 """
 from __future__ import annotations
 
@@ -14,7 +17,7 @@ import streamlit as st
 API = os.environ.get("VNIR_API", "http://api:8000")
 ROOT = Path(os.environ.get("VNIR_ROOT", "/workspace"))
 
-st.set_page_config(page_title="Build Plane — Nang cap nen tang",
+st.set_page_config(page_title="Track 1 — Phat trien nen tang",
                    page_icon="🛠", layout="wide")
 
 
@@ -39,9 +42,10 @@ def api_post(path: str, payload: dict):
 
 
 # ---------------------------------------------------------------- header
-st.title("🛠 Build Plane — Xuong nang cap nen tang")
-st.caption("Nhom A · Noi tiep nhan yeu cau cai thien, phan ra thanh spec, dong bo GitHub. "
-           "Xem du lieu da thu thap tai **Ops Plane :8602**.")
+st.title("🛠 TRACK 1 — Phát triển nền tảng")
+st.caption("Nơi bạn nêu yêu cầu. Đội phân tích sẽ **thẩm định** xem nền tảng hiện tại "
+           "đã đáp ứng chưa — trước khi đội phát triển làm gì đó. "
+           "Phân tích đầu tư & vận hành dữ liệu nằm ở **Track 2 :8602**.")
 
 health = api_get("/health")
 c1, c2, c3 = st.columns(3)
@@ -50,144 +54,219 @@ if health:
     c2.metric("Thu muc goc", health["root"])
     c3.metric("Spec sẵn sàng", "co" if health["specs_dir_exists"] else "chua")
 
-tabs = st.tabs(["📥 Gui yeu cau", "📋 Yeu cau (REQ)", "🧩 Thanh phan (COMP)",
-                "✅ Cong viec (TASK)", "🔍 Kiem dinh", "📖 Huong dan AI"])
+tabs = st.tabs(["📥 Yêu cầu của bạn", "🔎 Thẩm định (ASSESS)", "📋 Yêu cầu (REQ)",
+                "🧩 Thành phần (COMP)", "✅ Công việc (TASK)", "🔗 Liên kết 2 track",
+                "🔍 Kiểm định", "📖 Hướng dẫn AI"])
 
-# ---------------------------------------------------------------- tab: gui yeu cau
+# ---------------------------------------------------------------- tab 0: gui yeu cau
 with tabs[0]:
-    st.subheader("Gui yeu cau cai thien / nang cap nen tang")
-    st.info("Viet bang tieng Viet binh thuong. He thong se luu nguyen van, "
-            "sau do PO phan ra thanh REQ → COMP → TASK de AI thuc thi.")
+    st.subheader("Gửi yêu cầu cải thiện / nâng cấp nền tảng")
+    st.info("Viết bằng tiếng Việt bình thường. Hệ thống lưu nguyên văn, rồi đội phân tích "
+             "**thẩm định** xem đã làm được chưa — bạn không cần tự phán đoán.")
     with st.form("intake"):
-        text = st.text_area("Yeu cau cua ban", height=180,
-                            placeholder="Vi du: Toi muon theo doi lai suat lien ngan hang hang ngay "
-                                        "va canh bao khi tang qua 5%...")
-        who = st.text_input("Nguoi yeu cau", value="nha-dau-tu")
-        if st.form_submit_button("Gui yeu cau", type="primary"):
+        text = st.text_area("Yêu cầu của bạn", height=180,
+                            placeholder="Ví dụ: Tôi muốn xem lãi suất liên ngân hàng qua đêm "
+                                        "và cảnh báo khi tăng quá 5%...")
+        who = st.text_input("Người yêu cầu", value="nha-dau-tu")
+        if st.form_submit_button("Gửi yêu cầu", type="primary"):
             if len(text.strip()) < 10:
-                st.warning("Yeu cau qua ngan, hay mo ta ro hon.")
+                st.warning("Yêu cầu quá ngắn, hãy mô tả rõ hơn.")
             else:
                 res = api_post("/intake", {"text": text, "requested_by": who, "channel": "ui-build"})
                 if res:
-                    st.success(f"Da ghi nhan → `{res['file']}`")
-                    st.caption("Buoc tiep theo: chay `python tools/specctl.py new req ...` "
-                               "hoac de PO agent phan ra.")
+                    st.success("Đã ghi nhận. Tiếp theo: đội phân tích sẽ thẩm định "
+                               "(xem tab 🔎 Thẩm định).")
 
     st.divider()
-    st.subheader("Hop thu yeu cau chua xu ly")
+    st.subheader("Hộp thư yêu cầu chưa xử lý")
     inbox = api_get("/intake") or []
     if not inbox:
-        st.caption("Hop thu trong.")
+        st.caption("Hộp thư trống.")
     for item in inbox:
         with st.expander(f"{item['file']}  ·  {item['modified'][:16]}"):
             st.text(item["preview"])
 
-# ---------------------------------------------------------------- tab: REQ
+# ---------------------------------------------------------------- tab 1: ASSESS
 with tabs[1]:
-    st.subheader("Yeu cau — can gi va vi sao")
+    st.subheader("🔎 Thẩm định — nền tảng hiện tại đã đáp ứng chưa?")
+    st.caption("Bước bắt buộc của Track 1: đội phân tích đánh giá so với bản hiện tại. "
+               "Kết luận phải có bằng chứng thật (lệnh đã chạy), không được phán đoán.")
+    asm = api_get("/specs/assess") or []
+    if not asm:
+        st.info("Chưa có yêu cầu nào cần thẩm định. Hãy gửi yêu cầu ở tab '📥 Yêu cầu của bạn'.")
+    else:
+        mau = {"da_dap_ung": "🟢", "dap_ung_mot_phan": "🟡",
+               "chua_dap_ung": "🔴", "khong_kha_thi": "⛔", "chua_tham_dinh": "⚪"}
+        st.dataframe(
+            [{"ID": a["id"], "Tiêu đề": a["title"], "Kết luận": mau.get(a.get("ket_luan"), "⚪"),
+               "Thẩm định bởi": a.get("nguoi_tham_dinh"),
+               "REQ sinh ra": len(a.get("sinh_ra_req", []))}
+             for a in asm], use_container_width=True, hide_index=True)
+        pick = st.selectbox("Xem / ghi nhận thẩm định", [a["id"] for a in asm])
+        d = api_get(f"/specs/item/{pick}")
+        if d:
+            st.markdown("**📝 Nguyên văn yêu cầu gốc** _(không bao giờ bị sửa)_")
+            st.code((d.get("origin") or {}).get("raw_request", "—"), language=None)
+            if d.get("bang_chung"):
+                st.markdown("**🔬 Bằng chứng đã chạy**")
+                for b in d["bang_chung"]:
+                    st.write(f"- `{b['kiem_tra']}` → {b['ket_qua']}")
+            if d.get("phan_thieu"):
+                st.markdown("**❌ Phần còn thiếu**")
+                for t in d["phan_thieu"]:
+                    st.write(f"- {t}")
+            if d.get("huong_dan_su_dung"):
+                st.success(f"Đã đáp ứng — hướng dẫn: {d['huong_dan_su_dung']}")
+            kl = st.selectbox("Ghi nhận kết luận",
+                             ["chua_tham_dinh", "da_dap_ung", "dap_ung_mot_phan",
+                              "chua_dap_ung", "khong_kha_thi"],
+                             index=["chua_tham_dinh", "da_dap_ung", "dap_ung_mot_phan",
+                                    "chua_dap_ung", "khong_kha_thi"].index(
+                                 d.get("ket_luan", "chua_tham_dinh")))
+            with st.form("ghinhanketluan"):
+                bc_kiemtra = st.text_input("Lệnh đã chạy (bắt buộc nếu chưa đáp ứng)")
+                bc_ketqua = st.text_input("Kết quả thật")
+                if st.form_submit_button("Lưu thẩm định", type="primary"):
+                    payload = {"ket_luan": kl}
+                    if bc_kiemtra:
+                        payload["bang_chung"] = [bc_kiemtra, bc_ketqua]
+                    res = api_post(f"/specs/assess/{pick}/conclude", payload)
+                    if res and res.get("ok"):
+                        st.success(f"Đã lưu kết luận: {kl}. "
+                                   f"Nếu cần phát triển, sinh REQ ở tab 📋 Yêu cầu (REQ).")
+                        st.rerun()
+
+# ---------------------------------------------------------------- tab 2: REQ
+with tabs[2]:
+    st.subheader("Yêu cầu — cần gì và vì sao")
     reqs = api_get("/specs/req") or []
     if reqs:
         st.dataframe(
-            [{"ID": r["id"], "Tieu de": r["title"], "Trang thai": r["status"],
-              "Uu tien": (r.get("priority") or {}).get("score"),
-              "Mat phang": r.get("plane"), "Component": len(r.get("components", []))}
+            [{"ID": r["id"], "Tiêu đề": r["title"], "Trạng thái": r["status"],
+              "Ưu tiên": (r.get("priority") or {}).get("score"),
+              "Mặt phẳng": r.get("plane"), "Component": len(r.get("components", [])),
+              "Từ ASSESS": r.get("tu_assess", "")}
              for r in reqs],
             use_container_width=True, hide_index=True)
-        pick = st.selectbox("Xem chi tiet", [r["id"] for r in reqs])
+        pick = st.selectbox("Xem chi tiết", [r["id"] for r in reqs], key="req")
         detail = api_get(f"/specs/item/{pick}")
         if detail:
             cA, cB = st.columns(2)
             with cA:
-                st.markdown("**Van de**")
+                st.markdown("**Vấn đề**")
                 st.write(detail.get("problem", "—"))
-                st.markdown("**Cau hoi dau tu**")
+                st.markdown("**Câu hỏi đầu tư**")
                 st.write(detail.get("investment_question", "—"))
             with cB:
-                st.markdown("**Ket qua mong doi**")
+                st.markdown("**Kết quả mong đợi**")
                 st.write(detail.get("outcome", "—"))
-                st.markdown("**Tieu chi nghiem thu**")
+                st.markdown("**Tiêu chí nghiệm thu**")
                 for a in detail.get("acceptance", []):
                     st.write(f"- {a}")
-            st.markdown("**Nguyen van yeu cau goc** _(khong bao gio bi sua)_")
+            st.markdown("**Nguyên văn yêu cầu gốc** _(không bao giờ bị sửa)_")
             st.code((detail.get("origin") or {}).get("raw_request", "—"), language=None)
     else:
-        st.caption("Chua co REQ nao.")
+        st.caption("Chưa có REQ nào.")
 
-# ---------------------------------------------------------------- tab: COMP
-with tabs[2]:
-    st.subheader("Thanh phan kien truc — sua o dau")
+# ---------------------------------------------------------------- tab 3: COMP
+with tabs[3]:
+    st.subheader("Thành phần kiến trúc — sửa ở đâu")
     comps = api_get("/specs/comp") or []
     if comps:
         st.dataframe(
-            [{"ID": c["id"], "Ten": c["name"], "Loai": c["kind"], "Trang thai": c["status"],
-              "Chu": c.get("owner_role"), "Mat phang": c.get("plane"),
-              "Rui ro": c.get("risk"), "Duong dan": ", ".join(c.get("paths", [])[:2])}
+            [{"ID": c["id"], "Tên": c["name"], "Loại": c["kind"], "Trạng thái": c["status"],
+              "Chủ": c.get("owner_role"), "Mặt phẳng": c.get("plane"),
+              "Rủi ro": c.get("risk"), "Đường dẫn": ", ".join(c.get("paths", [])[:2])}
              for c in comps],
             use_container_width=True, hide_index=True)
     else:
-        st.caption("Chua co COMP nao.")
+        st.caption("Chưa có COMP nào.")
 
-# ---------------------------------------------------------------- tab: TASK
-with tabs[3]:
-    st.subheader("Cong viec — goi thuc thi cho AI")
+# ---------------------------------------------------------------- tab 4: TASK
+with tabs[4]:
+    st.subheader("Công việc — gói thực thi cho AI")
     tasks = api_get("/specs/task") or []
     if tasks:
         st.dataframe(
-            [{"ID": t["id"], "Tieu de": t["title"], "Trang thai": t["status"],
+            [{"ID": t["id"], "Tiêu đề": t["title"], "Trạng thái": t["status"],
               "REQ": t.get("req_id"), "COMP": t.get("comp_id"),
               "Model": t.get("model_hint"), "Token": t.get("context_budget_tokens")}
              for t in tasks],
             use_container_width=True, hide_index=True)
-        pick = st.selectbox("Xem goi thuc thi", [t["id"] for t in tasks])
+        pick = st.selectbox("Xem gói thực thi", [t["id"] for t in tasks], key="task")
         d = api_get(f"/specs/item/{pick}")
         if d:
-            st.markdown("**Viec phai lam**")
+            st.markdown("**Việc phải làm**")
             st.write(d.get("intent"))
-            st.markdown("**File duoc phep sua**")
+            st.markdown("**File được phép sửa**")
             for f in d.get("files_to_touch", []):
-                st.write(f"- `{f['path']}` — **{f['action']}** {f.get('hint','')}")
-            st.markdown("**Lenh verify**")
+                st.write(f"- `{f['path']}` — **{f['action']}** {f.get('hint', '')}")
+            st.markdown("**Lệnh verify**")
             st.code("\n".join(d.get("verify_commands", [])), language="bash")
     else:
-        st.caption("Chua co TASK nao. Tao bang: `python tools/specctl.py new task ...`")
+        st.caption("Chưa có TASK nào. Tạo bằng: `python tools/specctl.py new task ...`")
 
-# ---------------------------------------------------------------- tab: kiem dinh
-with tabs[4]:
-    st.subheader("Kiem dinh spec (3 tang)")
-    st.caption("Tang 1: JSON Schema · Tang 2: toan ven lien ket · Tang 3: luat cho model AI nho")
-    if st.button("Chay kiem dinh", type="primary"):
+# ---------------------------------------------------------------- tab 5: lien ket 2 track
+with tabs[5]:
+    st.subheader("🔗 Liên kết hai track")
+    st.caption("BRIEF (Track 2) → ASSESS (thẩm định) → REQ (Track 1). "
+               "Mũi tên ngược: thiếu luồng dữ liệu thì đẩy từ Track 2 sang Track 1.")
+    briefs = api_get("/specs/brief") or []
+    asm_all = api_get("/specs/assess") or []
+    reqs = api_get("/specs/req") or []
+    for b in briefs:
+        st.markdown(f"**📊 {b['id']}** — {b['title']}  _[{b.get('status')}]_")
+        for sid in b.get("sinh_ra_assess", []):
+            a = next((x for x in asm_all if x["id"] == sid), None)
+            if not a:
+                continue
+            st.markdown(f"&nbsp;&nbsp;↳ 🔎 {sid} — {a.get('ket_luan')}")
+            for rid in a.get("sinh_ra_req", []):
+                r = next((x for x in reqs if x["id"] == rid), None)
+                if not r:
+                    continue
+                done = "✅" if r.get("status") == "done" else "🔧"
+                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;↳ 📋 {rid} {done} {r['status']} — {r['title'][:48]}")
+    if not briefs:
+        st.info("Chưa có đề bài phân tích nào (Track 2). Tạo tại Ops Plane :8602.")
+
+# ---------------------------------------------------------------- tab 6: kiem dinh
+with tabs[6]:
+    st.subheader("Kiểm định spec (3 tầng)")
+    st.caption("Tầng 1: JSON Schema · Tầng 2: toàn vẹn liên kết · Tầng 3: luật cho model AI nhỏ")
+    if st.button("Chạy kiểm định", type="primary"):
         res = api_get("/specs/validate")
         if res:
             if res["ok"]:
-                st.success(f"Tat ca hop le — {res['stats']}")
+                st.success(f"Tất cả hợp lệ — {res['stats']}")
             else:
-                st.error(f"{len(res['errors'])} loi")
+                st.error(f"{len(res['errors'])} lỗi")
                 for e in res["errors"]:
                     st.write(f"- {e}")
 
-# ---------------------------------------------------------------- tab: huong dan AI
-with tabs[5]:
-    st.subheader("Cach AI lam viec voi kho nay")
+# ---------------------------------------------------------------- tab 7: huong dan AI
+with tabs[7]:
+    st.subheader("Cách AI làm việc với kho này")
     st.markdown("""
-**Quy trinh chuan cho bat ky AI agent nao (ke ca model 3B):**
+**Quy trình chuẩn cho bất kỳ AI agent nào (kể cả model 3B):**
 
 ```bash
-python tools/specctl.py next --model small   # tim task vua suc
-python tools/specctl.py show TASK-0001       # doc goi thuc thi tu du
-# ... sua dung nhung file duoc liet ke ...
-python tools/specctl.py validate             # bat buoc pass
+python tools/specctl.py next --model small   # tìm task vừa sức
+python tools/specctl.py show TASK-0001       # đọc gói thực thi tự đủ
+# ... sửa dùng những file được liệt kê ...
+python tools/specctl.py validate             # bắt buộc pass
 git commit -m "feat(comp): ...
 
 Task-Id: TASK-0001
 Req-Id: REQ-0001"
 ```
 
-**Vi sao model nho van lam duoc:**
-- Moi TASK gioi han duoi 6.000 token ngu canh (CI chan neu vuot).
-- TASK liet ke chinh xac file duoc sua va file cam dung.
-- Moi TASK co lenh verify chay that de tu kiem chung.
-- `specs/SPEC-INDEX.md` la ban do 1 trang, khong can quet ca repo.
-- ID vinh vien khong tai su dung → truy vet nguoc ve yeu cau goc bat cu luc nao.
+**Vì sao model nhỏ vẫn làm được:**
+- Mỗi TASK giới hạn dưới 6.000 token ngữ cảnh (CI chặn nếu vượt).
+- TASK liệt kê chính xác file được sửa và file cấm đụng.
+- Mỗi TASK có lệnh verify chạy thật để tự kiểm chứng.
+- `specs/SPEC-INDEX.md` là bản đồ 1 trang, không cần quét cả repo.
+- ID vĩnh viễn không tái sử dụng → truy vết ngược về yêu cầu gốc bất cứ lúc nào.
 """)
     idx = ROOT / "specs" / "SPEC-INDEX.md"
     if idx.exists():

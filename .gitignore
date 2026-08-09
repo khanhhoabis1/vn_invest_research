@@ -33,3 +33,7 @@ data/gold/
 logs/
 context/chunks/
 context/index/*.duckdb
+
+# === runtime ephemeral ===
+intake/inbox/
+specs/_ledger.json

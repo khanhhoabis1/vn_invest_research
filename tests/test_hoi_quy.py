@@ -128,7 +128,7 @@ class TestCongCuChayDuoc:
     def test_import_duoc_moi_cong_cu(self, mod):
         importlib.import_module(mod)
 
-    @pytest.mark.parametrize("args", [["validate"], ["list", "req"], ["index"]])
+    @pytest.mark.parametrize("args", [["validate"], ["list", "req"], ["list", "assess"], ["list", "brief"], ["index"]])
     def test_specctl_chay_khong_crash(self, args):
         r = subprocess.run([PY, "tools/specctl.py", *args],
                            cwd=ROOT, capture_output=True, text=True)

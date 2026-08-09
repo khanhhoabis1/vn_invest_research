@@ -1,0 +1,25 @@
+id: REQ-0007
+title: 'Can luong lay du lieu: Gia co phieu VNM theo ngay'
+status: draft
+created: '2026-08-09'
+origin:
+  raw_request: '[Day tu BRIEF-0001] De bai phan tich "Phan tich co phieu VNM, co nen mua o vung gia hien
+    tai khong" can du lieu: Gia co phieu VNM theo ngay. Yeu cau goc: Phan tich co phieu VNM, co nen mua
+    o vung gia hien tai khong'
+  requested_by: PO
+  requested_at: '2026-08-09'
+  channel: track-cli
+problem: 'Nen tang chua dap ung: connector gia co phieu (KBS hoac Vietcap)'
+outcome: Nguoi dung xem duoc gia VNM theo ngay
+acceptance:
+- 'Da co: connector gia co phieu (KBS hoac Vietcap)'
+priority:
+  impact: 5
+  confidence: 4
+  effort: 3
+  score: 6.67
+plane: ops
+tu_assess: ASSESS-0001
+cho_brief:
+- BRIEF-0001
+updated: '2026-08-09'

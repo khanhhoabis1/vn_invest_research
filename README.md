@@ -118,6 +118,17 @@ Commit bắt buộc có trailer `Task-Id:` và `Req-Id:`.
 
 ---
 
+## Tài liệu vận hành
+
+- **`RUNBOOK.md`** — đọc đầu tiên: cách khởi động, dùng 2 track, xử lý sự cố (cho người dùng)
+- **`squad/07-runbooks/`** — runbook chi tiết: `01-khoi-dong`, `02-track1-phat-trien`,
+  `03-track2-phan-tich`, `04-su-co`
+- **`AGENTS.md`** — hợp đồng cho AI agent làm việc trên repo
+- **`squad/00-charter/HAI-TRACK.md`** — thiết kế chi tiết 2 track (Track 1 / Track 2)
+- **`GIT_WORKFLOW.md`** — quy trình commit / PR / GitHub
+
+---
+
 ## Lưu ý về dữ liệu kế thừa
 
 Số liệu thu thập trước khi có nền tảng (2024–2025) đã được chuyển vào
