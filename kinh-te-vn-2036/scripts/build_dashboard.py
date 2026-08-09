@@ -2,7 +2,13 @@
 """Sinh Dashboard HTML từ master-data.json."""
 import json, os, html
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # thu muc kinh-te-vn-2036
+
+LEGACY_BANNER = """<div style="background:#7f1d1d;color:#fff;padding:12px 18px;font-family:system-ui,sans-serif;font-size:14px;line-height:1.55;border-bottom:3px solid #dc2626">
+<strong>&#9888; ẢNH CHỤP LỊCH SỬ — 2024/2025, KHÔNG CÒN CẬP NHẬT</strong><br>
+Số liệu trang này thu thập thủ công, phần lớn dẫn nguồn báo chí thứ cấp, <b>không có URL gốc và ngày truy cập</b>.
+Không dùng làm căn cứ ra quyết định đầu tư. Dữ liệu chính thức có kiểm chứng: mở <b>Ops Plane — http://localhost:8602</b>.
+</div>"""
 DATA = os.path.join(ROOT, "data-nguon", "master-data.json")
 OUT = os.path.join(ROOT, "docs-bao-cao", "dashboard-kinh-te-vn-2036.html")
 
@@ -106,7 +112,7 @@ doc = f'''<!DOCTYPE html>
   .note {{ font-size:11.5px; color:var(--muted); margin-top:14px; }}
 </style>
 </head>
-<body>
+<body>{LEGACY_BANNER}
 <header class="top">
   <h1>📊 Dashboard Kinh tế Việt Nam 10 năm tới (2026–2036)</h1>
   <p>Kỳ dữ liệu: {esc(d["meta"]["ky_cap_nhat"])}</p>

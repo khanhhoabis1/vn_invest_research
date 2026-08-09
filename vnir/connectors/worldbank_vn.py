@@ -45,15 +45,35 @@ class WorldBankVietnamConnector(BaseConnector):
     unit = "hon hop (xem tung chi so)"
     description = "14 chi so vi mo cot loi cua Viet Nam tu World Bank Open Data API v2."
 
+    # Da kiem chung thuc te (09/08/2026) tren ca host lan container:
+    #  - Tham so `date=1990:2030` gay ReadTimeout  -> khong dung
+    #  - `per_page=300` gay ReadTimeout            -> dung 100
+    #  - World Bank tra HTTP 502 CHAP CHON cho mot so chi so, keo dai nhieu phut.
+    #    Vi vay connector phai chiu loi TUNG PHAN: mot chi so hong khong duoc
+    #    lam hong ca lan chay (nguyen tac P8 — that bai phai on ao nhung co kiem soat).
     def fetch(self) -> list[FetchResult]:
         results: list[FetchResult] = []
+        failed: list[str] = []
         for code in INDICATORS:
             url = BASE.format(code=code)
-            # Luu y: KHONG dung tham so `date=` — da kiem chung thuc te la
-            # World Bank API bi timeout khi loc theo khoang nam. Lay het roi loc o parse().
-            r = self.http_get(url, params={"format": "json", "per_page": 200})
+            try:
+                r = self.http_get(url, params={"format": "json", "per_page": 100})
+            except ConnectorError as exc:
+                self.log.warning("Bo qua chi so %s: %s", code, exc)
+                failed.append(code)
+                continue
             r.extra["indicator_code"] = code
             results.append(r)
+
+        self.failed_indicators = failed
+        if not results:
+            raise ConnectorError(
+                f"Khong lay duoc chi so nao ({len(failed)}/{len(INDICATORS)} that bai). "
+                "Nhieu kha nang World Bank API dang su co — thu lai sau."
+            )
+        if failed:
+            self.log.warning("Thanh cong mot phan: %d/%d chi so. Thieu: %s",
+                             len(results), len(INDICATORS), ", ".join(failed))
         return results
 
     def parse(self, results: list[FetchResult]) -> list[dict]:

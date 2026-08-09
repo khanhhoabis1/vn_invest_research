@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import yaml  # noqa: E402
 
-from spec_lib import ensure_dirs, kind_of, load, load_all, next_id, save, today  # noqa: E402
+from spec_lib import SPECS, ensure_dirs, kind_of, load, load_all, next_id, save, today  # noqa: E402
 from spec_validate import validate_all  # noqa: E402
 
 OK, BAD, WARN = "\033[92m", "\033[91m", "\033[93m"
