@@ -1,0 +1,18 @@
+id: COMP-0008
+name: GitHub Automation
+kind: workflow
+status: planned
+created: '2026-08-09'
+owner_role: ARCH
+plane: build
+purpose: Dong bo spec sang Issue/PR, CI kiem dinh spec va trailer commit
+paths:
+- tools/ghsync.py
+- .github/
+tech:
+- gh
+- github-actions
+requirements:
+- REQ-0003
+risk: medium
+updated: '2026-08-09'

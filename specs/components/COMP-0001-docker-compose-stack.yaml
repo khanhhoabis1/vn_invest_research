@@ -1,0 +1,20 @@
+id: COMP-0001
+name: Docker Compose Stack
+kind: infra
+status: planned
+created: '2026-08-09'
+owner_role: ARCH
+plane: shared
+purpose: Dinh nghia va dieu phoi toan bo dich vu chay cuc bo tren Docker Desktop
+paths:
+- docker-compose.yml
+- Dockerfile
+- Makefile
+- .env.example
+tech:
+- docker
+- docker-compose
+requirements:
+- REQ-0001
+risk: medium
+updated: '2026-08-09'

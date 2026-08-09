@@ -1,0 +1,16 @@
+id: COMP-0004
+name: Source Registry
+kind: schema
+status: planned
+created: '2026-08-09'
+owner_role: QA
+plane: ops
+purpose: 'So dang ky nguon du lieu: URL, tan suat, rui ro phap ly, SLA do tuoi'
+paths:
+- vnir/registry/
+tech:
+- yaml
+requirements:
+- REQ-0005
+risk: high
+updated: '2026-08-09'

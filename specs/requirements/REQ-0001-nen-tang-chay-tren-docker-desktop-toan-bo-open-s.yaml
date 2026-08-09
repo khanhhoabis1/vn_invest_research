@@ -1,0 +1,29 @@
+id: REQ-0001
+title: Nen tang chay tren Docker Desktop, toan bo open source cuc bo
+status: draft
+created: '2026-08-09'
+origin:
+  channel: chat
+  raw_request: bo sung them yeu cau platform chay tren docker, khoi chay voi docker desktop duoc; su dung
+    cac cong cu, thu vien, nen tang la open source va chay cuc bo trong docker
+  requested_by: nha-dau-tu
+problem: Hien tai chua co nen tang chay duoc; moi thu la file roi rac, khong co API, khong co UI, khong
+  tu dong thu thap du lieu.
+outcome: Mot lenh docker compose up dung len day du API, worker thu thap, 2 UI (Build plane va Ops plane),
+  tat ca open source va chay hoan toan cuc bo.
+priority:
+  impact: 5
+  confidence: 5
+  effort: 4
+  score: 6.25
+acceptance:
+- 'TODO: tieu chi nghiem thu kiem chung duoc'
+plane: both
+components: []
+tags:
+- docker
+- infra
+- open-source
+investment_question: Toi co the theo doi lien tuc cac chi bao vi mo va thi truong de ra quyet dinh dau
+  tu khong?
+updated: '2026-08-09'

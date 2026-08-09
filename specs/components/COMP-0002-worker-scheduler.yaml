@@ -1,0 +1,19 @@
+id: COMP-0002
+name: Worker & Scheduler
+kind: service
+status: planned
+created: '2026-08-09'
+owner_role: DE
+plane: ops
+purpose: Chay connector theo lich bang APScheduler, ghi bronze va chuan hoa silver
+paths:
+- vnir/worker/
+tech:
+- apscheduler
+- httpx
+- pandas
+- duckdb
+requirements:
+- REQ-0005
+risk: medium
+updated: '2026-08-09'

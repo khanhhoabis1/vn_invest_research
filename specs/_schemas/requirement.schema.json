@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vn-invest.local/schemas/requirement.schema.json",
+  "title": "Requirement (REQ)",
+  "description": "Yeu cau nghiep vu cap cao. Tra loi: CAN GI va VI SAO. Khong chua chi tiet ky thuat.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "status",
+    "created",
+    "origin",
+    "problem",
+    "outcome",
+    "acceptance",
+    "priority"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-[0-9]{4}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 120
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "in_progress",
+        "in_review",
+        "done",
+        "rejected",
+        "blocked",
+        "superseded"
+      ]
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "origin": {
+      "type": "object",
+      "required": [
+        "channel",
+        "raw_request"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "channel": {
+          "enum": [
+            "ui-build",
+            "cli",
+            "intake-file",
+            "chat",
+            "cron",
+            "incident"
+          ]
+        },
+        "raw_request": {
+          "type": "string",
+          "minLength": 5,
+          "description": "Nguyen van yeu cau nguoi dung, KHONG duoc chinh sua"
+        },
+        "requested_by": {
+          "type": "string"
+        },
+        "source_file": {
+          "type": "string"
+        }
+      }
+    },
+    "problem": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Van de hien tai, dau la noi dau"
+    },
+    "outcome": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Ket qua mong muon, do duoc"
+    },
+    "investment_question": {
+      "type": "string",
+      "description": "Cau hoi dau tu phia sau (bat buoc voi REQ ve du lieu)"
+    },
+    "priority": {
+      "type": "object",
+      "required": [
+        "impact",
+        "confidence",
+        "effort"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "impact": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "effort": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "score": {
+          "type": "number"
+        }
+      }
+    },
+    "acceptance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 10
+      },
+      "description": "Tieu chi nghiem thu, moi dong kiem chung duoc"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^COMP-[0-9]{4}$"
+      }
+    },
+    "plane": {
+      "enum": [
+        "build",
+        "ops",
+        "both"
+      ],
+      "description": "Thuoc mat phang nao"
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^REQ-[0-9]{4}$"
+      }
+    },
+    "superseded_by": {
+      "type": "string",
+      "pattern": "^REQ-[0-9]{4}$"
+    },
+    "github": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issue": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

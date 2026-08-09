@@ -1,0 +1,20 @@
+id: COMP-0007
+name: Spec System
+kind: library
+status: planned
+created: '2026-08-09'
+owner_role: ARCH
+plane: build
+purpose: 'He thong spec REQ/COMP/TASK: schema, CLI specctl, kiem dinh 3 tang'
+paths:
+- tools/spec_lib.py
+- tools/specctl.py
+- tools/spec_validate.py
+- specs/_schemas/
+tech:
+- jsonschema
+- pyyaml
+requirements:
+- REQ-0003
+risk: high
+updated: '2026-08-09'
